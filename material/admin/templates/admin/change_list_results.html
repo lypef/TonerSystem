@@ -1,0 +1,39 @@
+{% load i18n admin_static %}{% load cycle from future %}
+{% if results %}
+<div class="results">
+    <table id="result_list" class="table bordered">
+        <thead>
+            <tr>
+                <td></td>
+                {% for header in result_headers %}
+                {% if 'action-checkbox' not in header.class_attrib %}
+                <th scope="col" {{ header.class_attrib }}>
+                    {% if header.sortable %}
+                        {% if header.sort_priority == 0 %}
+                            <a href="{{ header.url_primary }}">{{ header.text|capfirst }}</a>
+                        {% elif header.ascending %}
+                            <a href="{{ header.url_primary }}" title="{% trans "Toggle sorting" %}"><i class="zmdi zmdi-long-arrow-up zmdi-hc-fw"></i> {{ header.text|capfirst }}</a>
+                        {% else %}
+                            <a href="{{ header.url_remove }}" title="{% trans "Remove from sorting" %}"><i class="zmdi zmdi-long-arrow-down zmdi-hc-fw"></i> {{ header.text|capfirst }}</a>
+                        {% endif %}
+                    {% else %}
+                        <span>{{ header.text|capfirst }}</span>
+                    {% endif %}
+                </th>{% endif %}{% endfor %}
+            </tr>
+        </thead>
+        <tbody>                
+            {% for result in results %}
+            {% if result.form.non_field_errors %}
+            <tr><td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td></tr>
+            {% endif %}
+            <tr class="{% cycle 'row1' 'row2' %}">
+                <td></td>
+                {% for item in result %}
+                {% if 'action-checkbox' not in item %}{{ item }}{% endif %}
+                {% endfor %}</tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
