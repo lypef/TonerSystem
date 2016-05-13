@@ -8,5 +8,11 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
 def login(request): 
-     return render(request, 'login.html') 
+     if request.user.is_authenticated():
+        return render(request,'manage.html')
+     return render(request,'login.html')
+
+
+		        
