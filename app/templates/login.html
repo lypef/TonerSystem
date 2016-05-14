@@ -12,8 +12,16 @@
 		<div class="col m6">
 
 		<div class="col s6 z-depth-6 card-panel  grey lighten-5">
-		<form class="login-form">
+		<form class="login-form" method="POST"> {% csrf_token %}
 		<div class="row">
+		
+		{% if user.is_authenticated %}
+			<script type="text/javascript">
+			window.location="/manage";
+			</script> 
+		{% endif %}
+		
+		
 		<div class="input-field col s12 center">
 		<img src="https://cdn2.iconfinder.com/data/icons/thesquid-ink-40-free-flat-icon-pack/64/printer-2-128.png" alt="" class="responsive-img valign profile-image-login">
 		<p class="center login-form-text">Manage catbridge</p>
@@ -23,16 +31,14 @@
 		<div class="row margin">
 		<div class="input-field col s12">
 		<i class="mdi-action-account-circle prefix"></i>
-		<input class="validate" id="email" type="email">
-		<label for="email" data-error="wrong" data-success="right" class="left-align">Email</label>
+		<input name="username" class="validate" id="username" type="text" placeholder = "usuario">
 		</div>
 		</div>
 
 		<div class="row margin">
 		<div class="input-field col s12">
 		<i class="mdi-action-lock prefix"></i>
-		<input id="password" type="password">
-		<label for="password">Password</label>
+		<input name="password" id="password" type="password" placeholder = "*****">
 		</div>
 		</div>
 
@@ -45,7 +51,7 @@
 		<br>
 		<div class="row">
 		<div class="input-field col s12">
-		<a href="login.html" class="btn waves-effect waves-light col s12">Login</a>
+		<button type="submit" class="btn waves-effect waves-light col s12">Ingresar</button>
 		</div>
 		</div>
 
