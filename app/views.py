@@ -13,6 +13,7 @@ def login(request):
     	return render(request,'manage.html')
     return render(request,'login.html')
 
+@login_required
 def manage(request):
 
     return render(request,'manage.html')
