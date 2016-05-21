@@ -4,9 +4,11 @@
 	{% include 'material/includes/material_js.html' %}
 <head>
 	<title>{% block title %} {%endblock%}</title>
-	
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	{% block menu %}
-	<nav class="teal" role="navigation">
+  <div class="navbar-fixed">
+  
+  <nav class="teal" role="navigation">
 	<ul id="ListUsuario" class="dropdown-content">
 	<li><a href="#!">Perfil</a></li>
 	<li><a href="#!">Preferencias</a></li>
@@ -15,40 +17,49 @@
 	</ul>
   <nav class="teal" role="navigation">
   <ul id="ListCodigo" class="dropdown-content">
-  <li><a href="#!">Generar</a></li>
+  <li><a href="#">Agregar</a></li>
   <li><a href="#!">Consultar</a></li>
   <li><a href="#">Modificar</a></li>
   </ul>
 
   <nav class="teal" role="navigation">
   <ul id="ListClientes" class="dropdown-content">
-  <li><a href="#!">Agregar</a></li>
+  <li><a href="/newclient">Agregar</a></li>
   <li><a href="#!">Consultar</a></li>
   <li><a href="#">Modificar</a></li>
   </ul>
 
+  <nav class="teal" role="navigation">
+  <ul id="Mostrar" class="dropdown-content">
+  <li><a href="#!">Cartuchos en servicio</a></li>
+  <li><a href="#!">Fin de vida util</a></li>
+  <li><a href="#">Status general</a></li>
+  </ul>
+
     <div class="nav-wrapper">
       <a href="/" class="brand-logo">CLTA<i class="mdi-action-language right"></i></a></li>
-      </ul></a>
+      </a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
 
       <ul class="right hide-on-med-and-down">
         
-        <li><a href="#">Servicio<i class="mdi-action-room left"></i></a></li>
+        <li><a class="dropdown-button" href="#!" data-activates="Mostrar
+        ">Mostrar
+        <i class="material-icons left">view_module</i><i class="mdi-hardware-keyboard-arrow-down right"></i></a></li>
         
 
         <li><a class="dropdown-button" href="#!" data-activates="ListClientes
         ">Clientes
-        <i class="mdi-social-group left"></i></a></li>
+        <i class="mdi-social-group left"></i><i class="mdi-hardware-keyboard-arrow-down right"></i></a></li>
         
 
         <li><a class="dropdown-button" href="#!" data-activates="ListCodigo
         ">Codigos
-        <i class="mdi-action-credit-card left"></i></a></li>
+        <i class="material-icons left">credit_card</i><i class="mdi-hardware-keyboard-arrow-down right"></i></a></li>
         
         <li><a class="dropdown-button" href="#!" data-activates="ListUsuario">
         {{user.username.capitalize}}
-        <i class="mdi-hardware-keyboard-arrow-down right"></i></a></li>
+        <i class="mdi-hardware-keyboard-arrow-down right"></i><i class="material-icons left">person_pin</i></a></li>
       </ul>
       
       <ul class="side-nav" id="mobile-demo">
@@ -59,54 +70,98 @@
       </ul>
     </div>
   </nav>
+  </div>
    {%endblock%}
 
 </head>
 	<body class="teal">
+    {% block slider %}
+      <script type="text/javascript">
+  $(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
+</script>
+<div class="slider">
+    <ul class="slides">
+      <li>
+        <img src="http://www.globaltonersc.mx/images/stories/virtuemart/product/toner-gen-san-111.jpg"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>Toner monocromatico.!</h3>
+          <h5 class="light grey-text text-lighten-3">Hp, Samsung, Brother.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://www.dimencolor.com/pics/contenido/ce26p1.jpg"> <!-- random image -->
+        <div class="caption left-align">
+          <h3>Llena tu vida de color.</h3>
+          <h5 class="light grey-text text-lighten-3">Toner alto rendimiento color.</h5>
+        </div>
+      </li>
+      <li>
+        <img src="http://lh3.ggpht.com/u5E7bDYBGyOLpzBzD5Ab72I_hTVgiwaYfn_EPFMIgs5B3du6f5Y0ORls6JouwtSxnDxSNXChGF772f_KTETsvOgRHw=s1101"> <!-- random image -->
+        <div class="caption right-align">
+          <h3>Cartuchos de tinta.</h3>
+        </div>
+      </li>
+      <li>
+        <img src="http://maybecomputacion.com.ar/images/impresora-1.jpg"> <!-- random image -->
+        <div class="caption center-align">
+          <h3>Calidad original!</h3>
+          <h5 class="light grey-text text-lighten-3">Aseguramos calidad original en todos tus cartuchos recargados o remanufacturados.</h5>
+        </div>
+      </li>
+    </ul>
+  </div>
+    {% endblock %}
     
-    <div class="col s12 m5">
-        <div class="card-panel">
+        <div class="card-panel col s12 l2"> 
           <span class="black-text">
-          <div class="col s12 m5">
-        <div class="card-panel">
-          <span class="black-text">  
               {% block body %}
               {% endblock %}
-          </span>
+          </apan>
         </div>
-      </div>
-            
-          </span>
-        </div>
-      </div>
+    
 
 	</body>
 
      {% block footer %}
+      <style type="text/css"> 
+        body
+        { 
+          color: white; 
+        } 
+      </style> 
      <footer class="page-footer teal">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Manage catbridge by: clta</h5>
-                <p class="grey-text text-lighten-4">Sistema desarrollado con el fin de llevar un control de recargas y remanufactura de cartuchos de toner. Asi como de nuestros clientes. se implementa el control de insumos y personal tecnico.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Desarrollador</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="http://www.cyberchoapas.com">CLTA</a></li><br>
-                  <li>
-                    
-                    <a href="https://twitter.com/intent/tweet?screen_name=Lypef_Tux" class="twitter-mention-button" data-size="large" data-related="Lypef_Tux">Tweet to @Lypef_Tux</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          
+             <center>
+               <div class="row">
 
-                  </li><br>
-                </ul>
+      <div class="col s12 l4">
+        <div class="section">
+          <i class="large material-icons">insert_chart</i>
+          <h4><strong>Acelera el desarrollo</strong></h4>
+          <p class="flow-text">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p>
+        </div>
+      </div>
+      <div class="col s12 l4">
+        <div class="section">
+          <i class="large material-icons">insert_chart</i>
+          <h4><strong>Acelera el desarrollo</strong></h4>
+          <p class="flow-text">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p>
+        </div>
+      </div>
+      <div class="col s12 l4">
+        <div class="section">
+          <i class="large material-icons">insert_chart</i>
+          <h4><strong>Acelera el desarrollo</strong></h4>
+          <p class="flow-text">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components.</p>
+        </div>
+      </div>
 
-              </div>
+    </div>
+             </center>
 
-              
-            </div>
-          </div>
+
           <div class="footer-copyright">
             <div class="container">
             © 2016 Todos los derechos reservados.

@@ -6,6 +6,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+from django import forms
+
 # Create your views here.
 def login(request): 
 
@@ -18,7 +20,9 @@ def manage(request):
 
     return render(request,'manage.html')
 
-     	
-
-
-		        
+@login_required
+def newclient(request):
+    if request.method == 'POST':
+    	return render(request,'manage.html')
+    
+    return render (request,'newclient.html')
