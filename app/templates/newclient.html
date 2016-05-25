@@ -4,8 +4,6 @@
 {% block slider %}{% endblock %}
 {% block body %} 
 
-
-
   <form class="login-form" method="POST"> {% csrf_token %}
 	<div class="row">
 		
@@ -39,7 +37,7 @@
 
      <div class="input-field col s12 l6">
           <i class="material-icons prefix">email</i>
-          <input id="icon_prefix" type="text" class="validate" placeholder="Email" name="email" value="{{ email }}">
+          <input id="icon_prefix" type="email" class="validate" placeholder="Email" name="email" value="{{ email }}">
       </div>
 		
 		

@@ -18,15 +18,14 @@
   <nav class="teal" role="navigation">
   <ul id="ListCodigo" class="dropdown-content">
   <li><a href="#">Agregar</a></li>
-  <li><a href="#!">Consultar</a></li>
+  <li><a href="#modalsearch" class="modal-trigger">Consultar</a></li>
   <li><a href="#">Modificar</a></li>
   </ul>
 
   <nav class="teal" role="navigation">
   <ul id="ListClientes" class="dropdown-content">
   <li><a href="/newclient">Agregar</a></li>
-  <li><a href="#!">Consultar</a></li>
-  <li><a href="#">Modificar</a></li>
+  <li><a href="/list_clients">Visualizar</a></li>
   </ul>
 
   <nav class="teal" role="navigation">
@@ -34,6 +33,7 @@
   <li><a href="#!">Cartuchos en servicio</a></li>
   <li><a href="#!">Fin de vida util</a></li>
   <li><a href="#">Status general</a></li>
+  <li><a href="#">Clientes</a></li>
   </ul>
 
     <div class="nav-wrapper">
@@ -72,6 +72,16 @@
   </nav>
   </div>
    {%endblock%}
+
+{% if messages %}
+  {% for message in messages %}
+  
+  <script type="text/javascript">
+    Materialize.toast('{{message}}', 7000)
+  </script>
+  
+  {% endfor %}
+{% endif %}
 
 </head>
 	<body class="teal">
@@ -169,4 +179,37 @@
           </div>
         </footer>
      {% endblock %}
+
+
+   <script type="text/javascript">
+    $(document).ready(function(){
+      $('.modal-trigger').leanModal();
+    });
+   </script>
+  <!-- Modal search -->
+  <div id="modalsearch" class="modal">
+    <div class="modal-content">
+      <span class="black-text">
+        <h4>Ingrese codigo que desea consultar.</h4>
+        
+    <form action="/search"  class="col s12" method="POST"> {% csrf_token %}
+    
+        
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search </i>
+          <input id="icon_prefix" type="number" class="validate">
+          <label for="icon_prefix">Codigo de cartucho</label>
+        </div>
+
+        <center>
+          <button type="submit" class="modal-action modal-close btn waves-effect waves-light col s12">Ingresar</button>
+        </center>
+    
+    </form>  
+
+      </span>
+    </div>
+  </div>
+
+
 </html>
