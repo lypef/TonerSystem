@@ -72,7 +72,7 @@ def search(request):
     return render (request,'search.html')
 
 def list_clients(request):
-    Llclients = clients.objects.all()
+    Llclients = clients.objects.all().order_by('-id')
     paginator = Paginator(Llclients, 10) # Show 25 contacts per page
 
     page = request.GET.get('page')
