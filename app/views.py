@@ -18,7 +18,6 @@ def login(request):
 
 @login_required
 def manage(request):
-
     return render(request,'manage.html')
 
 @login_required
@@ -67,12 +66,14 @@ def newclient(request):
 
 def search(request):
     
-    if request.method == "POST":
-        return render (request,'manage.html')
     return render (request,'search.html')
 
 def list_clients(request):
-    Llclients = clients.objects.all().order_by('-id')
+    if request.method == "GET":
+        Llclients = clients.objects.all().order_by('-id')
+    if request.method == "POST":
+        Llclients = clients.objects.all().order_by('-nombre')
+            
     paginator = Paginator(Llclients, 10) # Show 25 contacts per page
 
     page = request.GET.get('page')
@@ -86,3 +87,4 @@ def list_clients(request):
         Lclients = paginator.page(paginator.num_pages)
 
     return render (request,'list_clients.html',{'Lclients':Lclients})
+
