@@ -9,3 +9,6 @@ class clients(models.Model):
     movil = models.CharField(max_length=60) 
     email = models.EmailField()
 
+    def __str__(self): # __unicode__ en Python 2 
+        return self.nombre 
+

@@ -4,38 +4,49 @@
 {% block slider %}{% endblock %}
 {% block body %} 
 
-  {% if Lclients %}
-    {% for client in Lclients %}
-      {{client.nombre}}
-    {% endfor %}
-  {%endif%}
-
-  <table class="responsive-table striped black-text">
+    
+      <table class="responsive-table striped black-text">
         <thead>
           <tr>
-              <th data-field="id">Name</th>
-              <th data-field="name">Item Name</th>
-              <th data-field="price">Item Price</th>
+              <th data-field="id">NOMBRE</th>
+              <th data-field="name">EMPRESA</th>
+              <th data-field="price">CELULAR</th>
+              <th></th>
+              <th></th>
+              <th></th>
           </tr>
         </thead>
 
         <tbody>
+        {% for client in Lclients %}
           <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
+            <td>{{client.nombre}}</td>
+            <td>{{client.empresa}}</td>
+            <td>{{client.movil}}</td>
+            <td><a class="waves-effect waves-light btn green"><i class="material-icons left">visibility</i>Detalles</a></td>
+            <td><a class="waves-effect waves-light btn light-blue"><i class="material-icons left">mode_edit</i>Editar</a></td>
+            <td><a class="waves-effect waves-light btn red"><i class="material-icons left">delete</i>Eliminar</a></td>
           </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
+          {% endfor %}
         </tbody>
       </table>
+    
+<ul class="pagination center">
+    <span class="step-links">
+        {% if Lclients.has_previous %}
+            <a class="material-icons large" href="?page={{ Lclients.previous_page_number }}">chevron_left</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ Lclients.number }} de {{ Lclients.paginator.num_pages }}.
+        </span>
+
+        {% if Lclients.has_next %}
+            <a class="material-icons large" href="?page={{ Lclients.next_page_number }}">chevron_right</a>
+        {% endif %}
+    </span>
+</ul>
+
+  
             
 {% endblock %}

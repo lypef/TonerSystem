@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse 
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
@@ -52,7 +52,8 @@ def newclient(request):
     			)
     		insert.save()
     		messages.add_message(request, messages.INFO, 'Cliente agregado con exito')
-    		return render(request,'manage.html')
+    		return redirect('/list_clients')
+
 
     	
     return render(request, 'newclient.html', {
@@ -63,6 +64,7 @@ def newclient(request):
         'movil': request.POST.get('movil', ''),
         'email': request.POST.get('email', '')
         }) 
+
 def search(request):
     
     if request.method == "POST":
@@ -70,5 +72,17 @@ def search(request):
     return render (request,'search.html')
 
 def list_clients(request):
-    Lclients = clients
-    return render (request,'list_clients.html',{'Lclientes':Lclients})
+    Llclients = clients.objects.all()
+    paginator = Paginator(Llclients, 10) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    try:
+        Lclients = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        Lclients = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        Lclients = paginator.page(paginator.num_pages)
+
+    return render (request,'list_clients.html',{'Lclients':Lclients})
