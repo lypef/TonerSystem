@@ -15,5 +15,6 @@ urlpatterns = patterns('',
 	url(r'^manage$', views.manage, name='manage'),	
 	url(r'^newclient$', views.newclient, name='newclient'),
 	url(r'^search$', views.search, name='search'),
-    url(r'^list_clients$', views.list_clients, name='list_clients')
+    url(r'^list_clients$', views.list_clients, name='list_clients'),
+    url(r'^list_clients_view$', views.list_clients_view, name='list_clients_view')
 )

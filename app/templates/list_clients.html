@@ -23,9 +23,17 @@
             <td>{{client.nombre}}</td>
             <td>{{client.empresa}}</td>
             <td>{{client.movil}}</td>
-            <td><a class="waves-effect waves-light btn green"><i class="material-icons left">visibility</i>Detalles</a></td>
-            <td><a class="waves-effect waves-light btn light-blue"><i class="material-icons left">mode_edit</i>Editar</a></td>
-            <td><a class="waves-effect waves-light btn red"><i class="material-icons left">delete</i>Eliminar</a></td>
+            
+            <td>
+
+            <form action="/list_clients_view" method="POST">{% csrf_token %}
+              <input type="hidden" value="{{client.id}}" name="id"/>
+              <button class="waves-effect waves-light btn green" type="submit" ><i class="material-icons left">visibility</i>Detalles
+            </form>
+
+            <td><a class="waves-effect waves-light btn light-blue" name="{{ client.id }}"><i class="material-icons left">mode_edit</i>Editar</a></td>
+            
+            <td><a class="waves-effect waves-light btn red" name="{{ client.id }}"><i class="material-icons left">delete</i>Eliminar</a></td>
           </tr>
           {% endfor %}
         </tbody>
@@ -47,6 +55,56 @@
     </span>
 </ul>
 
-  
+<!-- Modal search clients -->
+  <div id="DetallesClients" class="modal">
+    <div class="modal-content">
+      <span class="black-text">
+        
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Namssssqa</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">business</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">my_location</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">phone</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">stay_current_portrait</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">email</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+
+        <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+        </div>
+
+      </span>
+    </div>
+  </div>  
             
 {% endblock %}

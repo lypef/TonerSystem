@@ -68,11 +68,12 @@ def search(request):
     
     return render (request,'search.html')
 
+@login_required
 def list_clients(request):
     if request.method == "GET":
-        Llclients = clients.objects.all().order_by('-id')
+        Llclients = clients.objects.all().order_by('-id')   
     if request.method == "POST":
-        Llclients = clients.objects.all().order_by('-nombre')
+        Llclients = clients.objects.filter(nombre__contains=request.POST.get('search', '')).order_by('nombre')
             
     paginator = Paginator(Llclients, 10) # Show 25 contacts per page
 
@@ -88,3 +89,7 @@ def list_clients(request):
 
     return render (request,'list_clients.html',{'Lclients':Lclients})
 
+@login_required
+def list_clients_view(request):
+    Lclients = clients.objects.filter(id=request.POST.get('id', ''))
+    return render(request,'list_clients_view.html',{'Lclients':Lclients})
