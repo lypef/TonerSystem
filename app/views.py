@@ -84,12 +84,17 @@ def list_clients(request):
         # If page is not an integer, deliver first page.
         Lclients = paginator.page(1)
     except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
+        # If page is out osf range (e.g. 9999), deliver last page of results.
         Lclients = paginator.page(paginator.num_pages)
 
     return render (request,'list_clients.html',{'Lclients':Lclients})
 
 @login_required
-def list_clients_view(request):
-    Lclients = clients.objects.filter(id=request.POST.get('id', ''))
-    return render(request,'list_clients_view.html',{'Lclients':Lclients})
+def list_clients_edit(request):
+    messages.add_message(request, messages.INFO, 'Cliente editado con exito')
+    return redirect ('/list_clients') 
+
+@login_required
+def list_clients_delete(request):
+    messages.add_message(request, messages.INFO, 'Cliente eliminado con exito')
+    return redirect ('/list_clients')        
