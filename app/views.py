@@ -64,10 +64,6 @@ def newclient(request):
         'email': request.POST.get('email', '')
         }) 
 
-def search(request):
-    
-    return render (request,'search.html')
-
 @login_required
 def list_clients(request):
     if request.method == "GET":
@@ -91,15 +87,34 @@ def list_clients(request):
 
 @login_required
 def list_clients_edit(request):
-    p = clients.objects.get(id=request.POST.get('id', ''))
-    p.nombre = request.POST.get('nombre', '').upper()
-    p.empresa = request.POST.get('empresa', '').upper()
+    try:
+        update = clients.objects.get(id=request.POST.get('id', ''))
+        update.nombre = request.POST.get('nombre', '').upper()
+        update.empresa = request.POST.get('empresa', '').upper()
+        update.direccion = request.POST.get('direccion', '').upper()
+        update.telefono = request.POST.get('telefono', '').upper()
+        update.movil = request.POST.get('movil', '').upper()
+        update.email = request.POST.get('email', '').upper()
+        update.save()
+        
+        messages.add_message(request, messages.INFO, 'Cliente editado con exito')
+        return redirect ('/list_clients') 
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_clients') 
     
-    p.save()
-    messages.add_message(request, messages.INFO, 'Cliente editado con exito')
-    return redirect ('/list_clients') 
+
 
 @login_required
 def list_clients_delete(request):
-    messages.add_message(request, messages.INFO, 'Cliente eliminado con exito')
-    return redirect ('/list_clients')        
+    try:
+        delete = clients.objects.get(id= request.POST.get('id',''))
+        delete.delete()
+
+        messages.add_message(request, messages.INFO, 'Cliente eliminado con exito')
+        return redirect ('/list_clients')        
+
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_clients')        
+    
