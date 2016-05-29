@@ -91,6 +91,11 @@ def list_clients(request):
 
 @login_required
 def list_clients_edit(request):
+    p = clients.objects.get(id=request.POST.get('id', ''))
+    p.nombre = request.POST.get('nombre', '').upper()
+    p.empresa = request.POST.get('empresa', '').upper()
+    
+    p.save()
     messages.add_message(request, messages.INFO, 'Cliente editado con exito')
     return redirect ('/list_clients') 
 

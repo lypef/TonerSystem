@@ -1,20 +1,23 @@
 <html>
-	{% include 'material/includes/material_css.html' %}
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	{% include 'material/includes/material_js.html' %}
 <head>
 	<title>{% block title %} {%endblock%}</title>
+  {% include 'material/includes/material_css.html' %}
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  {% include 'material/includes/material_js.html' %}
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	{% block menu %}
+
+</head>
+	<body class="teal">
+  {% block menu %}
   <div class="navbar-fixed">
   
   <nav class="teal" role="navigation">
-	<ul id="ListUsuario" class="dropdown-content">
-	<li><a href="#!">Perfil</a></li>
-	<li><a href="#!">Preferencias</a></li>
-	<li class="divider"></li>
-	<li><a href="/logout">salir</a></li>
-	</ul>
+  <ul id="ListUsuario" class="dropdown-content">
+  <li><a href="#!">Perfil</a></li>
+  <li><a href="#!">Preferencias</a></li>
+  <li class="divider"></li>
+  <li><a href="/logout">salir</a></li>
+  </ul>
 
   <nav class="teal" role="navigation">
   <ul id="ListCodigo" class="dropdown-content">
@@ -97,8 +100,6 @@
   {% endfor %}
 {% endif %}
 
-</head>
-	<body class="teal">
     {% block slider %}
       <script type="text/javascript">
   $(document).ready(function(){

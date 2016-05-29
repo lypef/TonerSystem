@@ -85,47 +85,45 @@
             <a class="waves-effect waves-light btn blue modal-trigger" name="{{ client.id }}" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a>
             </td>
 
+            <input id="icon_prefix" type="hidden" name="id" value="{{client.id}}" class="validate">
+
             <div id="modaledit{{client.id}}" class="modal">
               
         <div class="modal-content">
           <h5>{{client.nombre}}</h5>
-          <div class="input-field col s6">
+          
+          <div class="input-field col s12 l6">
           <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label class="black-text" for="icon_prefix">{{ client.nombre }}</label>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.nombre}}" name="nombre" >
         </div>
 
-        <div class="input-field col s6">
+        <div class="input-field col s12 l6">
           <i class="material-icons prefix">business</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label class="black-text" for="icon_prefix">{{ client.empresa }}</label>
+          <input id="icon_telephone" type="tel" class="validate" placeholder="{{client.empresa}}" name="empresa" >
         </div>
+      
 
-        <div class="input-field col s6">
+      <div class="input-field col s12 l6">
           <i class="material-icons prefix">my_location</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label class="black-text" for="icon_prefix">{{ client.direccion }}</label>
-        </div>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.direccion}}" name="direccion" >
+      </div>
 
-        <div class="input-field col s6">
+        <div class="input-field col s12 l6">
           <i class="material-icons prefix">phone</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label class="black-text" for="icon_prefix">{{ client.telefono }}</label>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.telefono}}" name="telefono" >
         </div>
 
 
-        <div class="input-field col s6">
+        <div class="input-field col s12 l6">
           <i class="material-icons prefix">stay_current_portrait</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label class="black-text" for="icon_prefix">{{ client.movil }}</label>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.movil}}" name="movil" >
         </div>
 
 
-        <div class="input-field col s6">
+     <div class="input-field col s12 l6">
           <i class="material-icons prefix">email</i>
-          <input id="icon_prefix" type="text" class="validate">
-          <label class="black-text" for="icon_prefix">{{ client.email }}</label>
-        </div>
+          <input id="icon_prefix" type="email" class="validate" placeholder="{{client.email}}" name="email" >
+      </div>
         
         <div class="modal-footer">
                 <button type="submit" class="modal-close btn waves-effect waves-light ">GUARDAR <i class="material-icons right">save</i></button>
