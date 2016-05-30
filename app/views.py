@@ -7,7 +7,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from models import clients
+from models import clients, cartridges
 
 # Create your views here.
 def login(request): 
@@ -118,3 +118,59 @@ def list_clients_delete(request):
         messages.add_message(request, messages.INFO, e)
         return redirect ('/list_clients')        
     
+@login_required
+def newcartridges(request):
+    Lclients = clients.objects.all().order_by('nombre')
+
+    if request.method == 'POST':
+        errors = []
+        if not request.POST.get('modelo_toner', ''): 
+            errors.append('error') 
+            messages.add_message(request, messages.INFO, 'Ingrese el modelo')
+        if not request.POST.get('cliente', ''): 
+            errors.append('error')
+            messages.add_message(request, messages.INFO, 'Seleccione un cliente')
+        if not request.POST.get('numero_recarga', ''): 
+            errors.append('error')
+            messages.add_message(request, messages.INFO, 'Ingrese un numero maximo de recargas')
+        
+        if not errors:
+            try:
+                insert = cartridges(
+                    modelo_imp = request.POST.get('modelo_impresora', '').upper(), 
+                    modelo = request.POST.get('modelo_toner', '').upper(), 
+                    numero_recarga_maxima = request.POST.get('numero_recarga', ''), 
+                    client = clients.objects.get(id=request.POST.get('cliente', '')), 
+                    descripcion = request.POST.get('descripcion', '').upper(), 
+                    observaciones = request.POST.get('observaciones', '').upper(),
+
+
+    cilindro_drum = '0',
+    rodillo_magnetico = '0',
+    rodillo_carga = '0',
+    cuchilla_impiadora = '0',
+    cuchilla_dosificadora = '0',
+    
+    
+fecha_ultimo_servcio = '1992-01-01'
+    
+                )
+                insert.save()
+                messages.add_message(request, messages.INFO, 'Cartucho agregado con exito')
+                return redirect('/list_clients')
+            except Exception, e:
+                messages.add_message(request, messages.INFO, e)
+
+    
+    
+
+    return render(request, 'newcartridges.html', {
+        'modelo_impresora': request.POST.get('modelo_impresora', ''),
+        'modelo_toner': request.POST.get('modelo_toner', ''),
+        'numero_recarga': request.POST.get('numero_recarga', ''),
+        'descripcion': request.POST.get('descripcion', ''),
+        'observaciones': request.POST.get('observaciones', ''),
+        'Lclients': Lclients
+        }) 
+
+

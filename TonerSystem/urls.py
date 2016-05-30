@@ -13,8 +13,13 @@ urlpatterns = patterns('',
     url(r'^$', 'django.contrib.auth.views.login', {'template_name':'login.html'}, name = 'login' ),
     url(r'^logout/', 'django.contrib.auth.views.logout_then_login', name = 'logout' ),
 	url(r'^manage$', views.manage, name='manage'),	
+    #Clients
 	url(r'^newclient$', views.newclient, name='newclient'),
 	url(r'^list_clients$', views.list_clients, name='list_clients'),
     url(r'^list_clients_edit$', views.list_clients_edit, name='list_clients_edit'),
-    url(r'^list_clients_delete$', views.list_clients_delete, name='list_clients_delete')
+    url(r'^list_clients_delete$', views.list_clients_delete, name='list_clients_delete'),
+
+    # Cartridges
+    url(r'^newcartridges$', views.newcartridges, name='newcartridges')
+    
 )

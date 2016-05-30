@@ -48,21 +48,4 @@
 	  </form>
 
     
-    <script type="text/javascript">
-      $(document).ready(function(){
-      $('.tooltipped').tooltip({delay: 50});
-      });
-
-    
-      {% for error in errors %} 
-
-        Materialize.toast('{{ error }}', 4000,'rounded')
-
-      {% endfor %} 
-
-
-      
-    </script>
-    
-
 {% endblock %}
