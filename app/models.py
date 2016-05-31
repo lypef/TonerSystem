@@ -20,7 +20,7 @@ class cartridges (models.Model):
 	cuchilla_impiadora = models.IntegerField(null=True)
 	cuchilla_dosificadora = models.IntegerField(null=True)
 	observaciones = models.TextField()
-	numero_recarga_maxima = models.IntegerField(null=True)
+	numero_recarga_maxima = models.IntegerField()
 	fecha_ultimo_servcio = models.DateField(null=True)
 	modelo = models.CharField(max_length=60) 
 	modelo_imp = models.CharField(max_length=60) 

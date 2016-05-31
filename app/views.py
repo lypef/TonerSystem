@@ -142,22 +142,11 @@ def newcartridges(request):
                     numero_recarga_maxima = request.POST.get('numero_recarga', ''), 
                     client = clients.objects.get(id=request.POST.get('cliente', '')), 
                     descripcion = request.POST.get('descripcion', '').upper(), 
-                    observaciones = request.POST.get('observaciones', '').upper(),
-
-
-    cilindro_drum = '0',
-    rodillo_magnetico = '0',
-    rodillo_carga = '0',
-    cuchilla_impiadora = '0',
-    cuchilla_dosificadora = '0',
-    
-    
-fecha_ultimo_servcio = '1992-01-01'
-    
+                    observaciones = request.POST.get('observaciones', '').upper()
                 )
                 insert.save()
                 messages.add_message(request, messages.INFO, 'Cartucho agregado con exito')
-                return redirect('/list_clients')
+                return redirect('/list_cartridges')
             except Exception, e:
                 messages.add_message(request, messages.INFO, e)
 
@@ -173,4 +162,36 @@ fecha_ultimo_servcio = '1992-01-01'
         'Lclients': Lclients
         }) 
 
+@login_required
+def list_cartridges(request):
+    if request.method == "GET":
+        Lcartridges = cartridges.objects.all().order_by('-id')   
+    if request.method == "POST":
+        Lcartridges = cartridges.objects.filter(id__contains=request.POST.get('code', '')).order_by('id')
+            
+    paginator = Paginator(Lcartridges, 10) # Show 25 contacts per page
 
+    page = request.GET.get('page')
+    try:
+        Lcartridges = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        Llcartridges = paginator.page(1)
+    except EmptyPage:
+        # If page is out osf range (e.g. 9999), deliver last page of results.
+        Lcartridges = paginator.page(paginator.num_pages)
+
+    return render (request,'list_cartridges.html',{'Lclients':Lcartridges})
+
+@login_required
+def list_cartridges_delete(request):
+    try:
+        delete = cartridges.objects.get(id= request.POST.get('id',''))
+        delete.delete()
+
+        messages.add_message(request, messages.INFO, 'Cartucho eliminado con exito')
+        return redirect ('/list_cartridges')        
+
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_cartridges')            

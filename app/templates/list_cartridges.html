@@ -8,9 +8,10 @@
       <table class="responsive-table striped black-text">
         <thead>
           <tr>
-              <th data-field="id">NOMBRE</th>
-              <th data-field="name"><center>EMPRESA</center></th>
-              <th data-field="price"><center>CELULAR</center></th>
+              <th data-field="price">CLIENTE</th>
+              <th data-field="id"><center>FOLIO</center></th>
+              <th data-field="name"><CENTER>MODELO</CENTER></th>
+              <th data-field="price"><center>ULTIMO SERVICIO</center></th>
               <th></th>
               <th></th>
               <th></th>
@@ -20,17 +21,17 @@
         <tbody>
         {% for client in Lclients %}
           <tr>
-            <td>{{client.nombre}}</td>
-            <td><center>{{client.empresa}}</center></td>
-            <td><center>{{client.movil}}</center></td>
-            
+            <td>{{client.client.nombre}}</td>
+            <td><center>{{client.id}}</center></td>
+            <td><center>{{client.modelo}}</center></td>
+            <td><center>{{client.fecha_ultimo_servcio}}</center></td>
             <td>
-            <!-- form view -->
+              <!-- form service -->
             <form>
-            <a class="waves-effect waves-light btn green modal-trigger" name="{{ client.id }}" href="#modalview{{client.id}}"><i class="material-icons left">visibility</i>Detalles</a>
+            <a class="waves-effect waves-light btn green modal-trigger" name="{{ client.id }}" href="#modalservice{{client.id}}"><i class="material-icons left">build</i>SERVICIO</a>
             </td>
 
-            <div id="modalview{{client.id}}" class="modal">
+            <div id="modalservice{{client.id}}" class="modal">
               
         <div class="modal-content">
           <h5>{{client.nombre}}</h5>
@@ -77,6 +78,118 @@
 
         </div>
           </form>  
+          <!-- fin service -->
+            </td>
+            <td>
+            <!-- form view -->
+            <form>
+            <a class="waves-effect waves-light btn orange modal-trigger" name="{{ client.id }}" href="#modalview{{client.id}}"><i class="material-icons left">visibility</i>Detalles</a>
+            </td>
+
+            <div id="modalview{{client.id}}" class="modal">
+              
+        <div class="modal-content">
+          
+          <div class="col s12 m5">
+        <div class="card-panel teal">
+            <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" class="black-text" disabled value="{{ client.client.nombre }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">CLIENTE</label>
+          </div>
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.modelo_imp }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">MODELO DE IMPRESORA</label>
+          </div>
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.modelo }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">MODELO DE CARTUCCHO</label>
+          </div>          
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.numero_recarga_maxima }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO MAXIMO DE RECARGAS</label>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+            <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.fecha_ultimo_servcio }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">FECHA DE ULTIMO SERVICIO</label>
+          </div> 
+
+          <div class="input-field col s6">
+          <i class="material-icons prefix white-text">mode_edit</i>
+          <textarea disabled id="icon_prefix2" class="materialize-textarea black-text">{{ client.descripcion }}</textarea>
+          <label for="icon_prefix2">DESCRIPCION</label>
+          </div>
+
+          <div class="input-field col s6">
+          <i class="material-icons prefix white-text">mode_edit</i>
+          <textarea disabled id="icon_prefix2" class="materialize-textarea black-text">{{ client.observaciones }}</textarea>
+          <label for="icon_prefix2">OBSERVACIONES</label>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.cilindro_drum }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CILINDRO-DRUM]</label>
+          </div>            
+          
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.rodillo_magnetico }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO MAGNETICO]</label>
+          </div>            
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.rodillo_carga }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO DE CARGA]</label>
+          </div>                      
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.cuchilla_impiadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA LIMPIADORA]</label>
+          </div>
+
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.cuchilla_dosificadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA DOSIFICADORA]</label>
+          </div>
+        </div>
+      </div>
+
+          
+                <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+                </div>
+
+        </div>
+          </form>  
           <!-- fin view -->
             <td>
             
@@ -94,35 +207,35 @@
           <h5>{{client.nombre}}</h5>
           
           <div class="input-field col s12 l6">
-          <i class="material-icons prefix black-text">account_circle</i>
+          <i class="material-icons prefix">account_circle</i>
           <input id="icon_prefix" type="text" class="validate" placeholder="{{client.nombre}}" value="{{client.nombre}}" name="nombre" >
         </div>
 
         <div class="input-field col s12 l6">
-          <i class="material-icons prefix black-text">business</i>
+          <i class="material-icons prefix">business</i>
           <input id="icon_telephone" type="tel" class="validate" placeholder="{{client.empresa}}" value="{{client.empresa}}" name="empresa" >
         </div>
       
 
       <div class="input-field col s12 l6">
-          <i class="material-icons prefix black-text">my_location</i>
+          <i class="material-icons prefix">my_location</i>
           <input id="icon_prefix" type="text" class="validate" placeholder="{{client.direccion}}" value="{{client.direccion}}" name="direccion" >
       </div>
 
         <div class="input-field col s12 l6">
-          <i class="material-icons prefix black-text">phone</i>
+          <i class="material-icons prefix">phone</i>
           <input id="icon_prefix" type="text" class="validate" placeholder="{{client.telefono}}" value="{{client.telefono}}" name="telefono" >
         </div>
 
 
         <div class="input-field col s12 l6">
-          <i class="material-icons prefix black-text">stay_current_portrait</i>
+          <i class="material-icons prefix">stay_current_portrait</i>
           <input id="icon_prefix" type="text" class="validate" placeholder="{{client.movil}}" value="{{client.movil}}" name="movil" >
         </div>
 
 
      <div class="input-field col s12 l6">
-          <i class="material-icons prefix black-text">email</i>
+          <i class="material-icons prefix">email</i>
           <input id="icon_prefix" type="email" class="validate" placeholder="{{client.email}}" value="{{client.email}}" name="email" >
       </div>
       
@@ -140,28 +253,22 @@
             </td>
             <!-- Form delete -->
             <td>
-            <form action="/list_clients_delete" method="POST"> {% csrf_token %}
+            <form action="/list_cartridges_delete" method="POST"> {% csrf_token %}
 
             <a class="waves-effect waves-light btn red modal-trigger" name="id" href="#modaldelete{{client.id}}"><i class="material-icons left">delete</i>Eliminar</a>
             
 
             <div id="modaldelete{{client.id}}" class="modal">
               <div class="modal-content">
-                <h4>ELIMINAR {{client.nombre}}</h4>
+                <h4>ELIMINAR CARTUCHO NUMERO : [ {{client.id}} ]</h4>
                 <p>
-                ESTA SEGURO QUE DESEA ELIMINAR EL CLIENTE?.
+                ESTA SEGURO QUE DESEA ELIMINAR EL CARTUCHO?.
                 <br><br>
-                NOMBRE: {{client.nombre}}
-                <br>
-                EMPRESA: {{client.empresa}}
-                <br>
-                DIRECCION: {{client.direccion}}
-                <br>
-                TELEFONO: {{client.telefono}}
-                <br>
-                MOVIL: {{client.movil}}
-                <br>
-                E-MAIL: {{client.email}}
+                CLIENTE: {{client.client.nombre}}
+                <br><br>DESCRIPCION:<br>
+                {{client.descripcion}}
+                <br><br>OBSERVACIONES:<br>
+                {{client.observaciones}}
                 </p>
                 </div>
                 <div class="modal-footer">

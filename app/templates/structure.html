@@ -22,7 +22,7 @@
   <nav class="teal" role="navigation">
   <ul id="ListCodigo" class="dropdown-content">
   <li><a href="/newcartridges">Agregar</a></li>
-  <li><a href="#">Gestionar</a></li>
+  <li><a href="/list_cartridges">Gestionar</a></li>
   <li><a href="#modalsearch" class="modal-trigger">Consultar</a></li>
   </ul>
 
@@ -207,12 +207,11 @@
       <span class="black-text">
         <h4>Ingrese codigo que desea consultar.</h4>
         
-    <form action="/search"  class="col s12" method="POST"> {% csrf_token %}
-    
+    <form action="/list_cartridges"  class="col s12" method="POST"> {% csrf_token %}
         
         <div class="input-field col s12">
           <i class="material-icons prefix">search </i>
-          <input id="icon_prefix" type="number" class="validate" autofocus="true">
+          <input id="icon_prefix" type="number" class="validate" autofocus="true" name="code">
           <label for="icon_prefix">Codigo de cartucho</label>
         </div>
 
