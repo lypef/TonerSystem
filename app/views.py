@@ -164,6 +164,8 @@ def newcartridges(request):
 
 @login_required
 def list_cartridges(request):
+    Lclients = clients.objects.all().order_by('nombre')
+
     if request.method == "GET":
         Lcartridges = cartridges.objects.all().order_by('-id')   
     if request.method == "POST":
@@ -181,7 +183,27 @@ def list_cartridges(request):
         # If page is out osf range (e.g. 9999), deliver last page of results.
         Lcartridges = paginator.page(paginator.num_pages)
 
-    return render (request,'list_cartridges.html',{'Lclients':Lcartridges})
+    return render (request,'list_cartridges.html',{'Lclients':Lcartridges, 'Lclients0': Lclients})
+
+@login_required
+def list_cartridges_edit(request):
+    try:
+        update = cartridges.objects.get(id=request.POST.get('id', ''))
+        update.modelo_imp = request.POST.get('modelo_impresora', '').upper()
+        update.modelo = request.POST.get('modelo_toner', '').upper()
+        update.numero_recarga_maxima = request.POST.get('numero_recarga', '').upper()
+        update.client.update = clients.objects.get(id=request.POST.get('cliente0', ''))
+        clients.objects.filter(id=request.POST.get('cliente0', '')).update(id=bar.id)
+        update.descripcion = request.POST.get('descripcion', '').upper()
+        update.observaciones = request.POST.get('observaciones', '').upper()
+        update.save()
+        
+        messages.add_message(request, messages.INFO, 'Cartucho editado con exito')
+        return redirect ('/list_cartridges') 
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_cartridges')     
+
 
 @login_required
 def list_cartridges_delete(request):

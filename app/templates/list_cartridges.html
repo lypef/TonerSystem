@@ -133,13 +133,13 @@
           <div class="input-field col s6">
           <i class="material-icons prefix white-text">mode_edit</i>
           <textarea disabled id="icon_prefix2" class="materialize-textarea black-text">{{ client.descripcion }}</textarea>
-          <label for="icon_prefix2">DESCRIPCION</label>
+          <label class="black-text" for="icon_prefix2">DESCRIPCION</label>
           </div>
 
           <div class="input-field col s6">
           <i class="material-icons prefix white-text">mode_edit</i>
           <textarea disabled id="icon_prefix2" class="materialize-textarea black-text">{{ client.observaciones }}</textarea>
-          <label for="icon_prefix2">OBSERVACIONES</label>
+          <label class="black-text" for="icon_prefix2">OBSERVACIONES</label>
           </div>
         </div>
       </div>
@@ -194,7 +194,7 @@
             <td>
             
             <!-- Edit -->
-          <form action="/list_clients_edit" method="POST"> {% csrf_token %}
+          <form action="/list_cartridges_edit" method="POST"> {% csrf_token %}
 
             <a class="waves-effect waves-light btn blue modal-trigger" name="{{ client.id }}" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a>
             </td>
@@ -204,40 +204,52 @@
         <div id="modaledit{{client.id}}" class="modal">
               
         <div class="modal-content">
-          <h5>{{client.nombre}}</h5>
-          
+
+
           <div class="input-field col s12 l6">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.nombre}}" value="{{client.nombre}}" name="nombre" >
+          <i class="material-icons prefix black-text">print</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="Modelo de impresora" name="modelo_impresora" value="{{ client.modelo_imp }}"></input>
+          <label class="black-text" for="disabled">MODELO DE IMPRESORA</label>
         </div>
 
-        <div class="input-field col s12 l6">
-          <i class="material-icons prefix">business</i>
-          <input id="icon_telephone" type="tel" class="validate" placeholder="{{client.empresa}}" value="{{client.empresa}}" name="empresa" >
-        </div>
-      
-
-      <div class="input-field col s12 l6">
-          <i class="material-icons prefix">my_location</i>
-          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.direccion}}" value="{{client.direccion}}" name="direccion" >
-      </div>
-
-        <div class="input-field col s12 l6">
-          <i class="material-icons prefix">phone</i>
-          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.telefono}}" value="{{client.telefono}}" name="telefono" >
+    <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">code</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="Modelo de toner" name="modelo_toner" value="{{ client.modelo }}"></input>
+          <label class="black-text" for="disabled">MODEO DE CARTUCHO</label>
         </div>
 
-
-        <div class="input-field col s12 l6">
-          <i class="material-icons prefix">stay_current_portrait</i>
-          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.movil}}" value="{{client.movil}}" name="movil" >
+    
+    <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">cached</i>
+          <input id="icon_prefix" type="number" class="validate" placeholder="Numero de recargas maxima" name="numero_recarga" value="{{client.numero_recarga_maxima}}"></input>
+          <label class="black-text" for="disabled">NUMERO MAXIMO DE RECARGAS</label>
         </div>
 
 
-     <div class="input-field col s12 l6">
-          <i class="material-icons prefix">email</i>
-          <input id="icon_prefix" type="email" class="validate" placeholder="{{client.email}}" value="{{client.email}}" name="email" >
-      </div>
+    <div class="input-field col s12 l6">
+        <select name="cliente0">
+          <option disabled selected>Cliente</option>
+          
+          {% for client0 in Lclients0 %}
+            <option value="{{client0.id}}">{{client0.nombre}} ({{client0.empresa}}) ({{client0.direccion}})</option>
+          {% endfor %}
+
+        </select>
+        
+    </div>
+    
+    <div class="input-field col s12">
+          <i class="material-icons prefix black-text">description</i>
+          <textarea id="icon_prefix" class="materialize-textarea" name="descripcion">{{client.descripcion}}</textarea>
+          <label  for="icon_prefix2">Descripcion</label>
+        </div>
+
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix black-text">pageview</i>
+          <textarea id="icon_prefix" class="materialize-textarea" name="observaciones">{{client.observaciones}}</textarea>
+          <label for="icon_prefix2">Observaciones</label>
+        </div>
       
 
         <div class="modal-footer">

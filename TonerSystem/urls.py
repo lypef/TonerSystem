@@ -22,5 +22,7 @@ urlpatterns = patterns('',
     # Cartridges
     url(r'^newcartridges$', views.newcartridges, name='newcartridges'),
     url(r'^list_cartridges$', views.list_cartridges, name='list_cartridges'),
+    url(r'^list_cartridges_edit$', views.list_cartridges_edit, name='list_cartridges_edit'),
     url(r'^list_cartridges_delete$', views.list_cartridges_delete, name='list_cartridges_delete')
+
 )
