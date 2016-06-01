@@ -23,6 +23,10 @@ urlpatterns = patterns('',
     url(r'^newcartridges$', views.newcartridges, name='newcartridges'),
     url(r'^list_cartridges$', views.list_cartridges, name='list_cartridges'),
     url(r'^list_cartridges_edit$', views.list_cartridges_edit, name='list_cartridges_edit'),
-    url(r'^list_cartridges_delete$', views.list_cartridges_delete, name='list_cartridges_delete')
+    url(r'^list_cartridges_delete$', views.list_cartridges_delete, name='list_cartridges_delete'),
+    url(r'^recharge_cartridge$', views.recharge_cartridge, name='recharge_cartridge'),
+    url(r'^restore_cartridge$', views.restore_cartridge, name='restore_cartridge')
 
 )
+
+

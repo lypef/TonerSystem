@@ -216,3 +216,13 @@ def list_cartridges_delete(request):
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
         return redirect ('/list_cartridges')            
+
+@login_required
+def recharge_cartridge(request):
+    messages.add_message(request, messages.INFO, 'Recarga normal')
+    return redirect ('/list_cartridges')
+
+@login_required
+def restore_cartridge(request):
+    messages.add_message(request, messages.INFO, 'Remanufacturado')
+    return redirect ('/list_cartridges')
