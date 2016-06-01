@@ -196,8 +196,8 @@
             <!-- Edit -->
           <form action="/list_cartridges_edit" method="POST"> {% csrf_token %}
 
-            <a class="waves-effect waves-light btn blue modal-trigger" name="{{ client.id }}" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a>
-            </td>
+            <a class="waves-effect waves-light btn blue modal-trigger" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a>
+            
 
             
 
@@ -227,7 +227,7 @@
 
 
     <div class="input-field col s12 l6">
-        <select name="cliente0">
+        <select name="clientselect">
           <option disabled selected>Cliente</option>
           
           {% for client0 in Lclients0 %}
@@ -253,6 +253,7 @@
       
 
         <div class="modal-footer">
+
                 <button type="submit" class="modal-close btn waves-effect waves-light" name="id" value="{{client.id}}">GUARDAR <i class="material-icons right">save</i></button>
 
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">CANCEL</a>
@@ -272,7 +273,7 @@
 
             <div id="modaldelete{{client.id}}" class="modal">
               <div class="modal-content">
-                <h4>ELIMINAR CARTUCHO NUMERO : [ {{client.id}} ]</h4>
+                <h4>ELIMINAR CARTUCHO CON NUMERO : [ {{client.id}} ]</h4>
                 <p>
                 ESTA SEGURO QUE DESEA ELIMINAR EL CARTUCHO?.
                 <br><br>

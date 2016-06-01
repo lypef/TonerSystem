@@ -164,7 +164,7 @@ def newcartridges(request):
 
 @login_required
 def list_cartridges(request):
-    Lclients = clients.objects.all().order_by('nombre')
+    Lclients = clients.objects.all()
 
     if request.method == "GET":
         Lcartridges = cartridges.objects.all().order_by('-id')   
@@ -192,8 +192,7 @@ def list_cartridges_edit(request):
         update.modelo_imp = request.POST.get('modelo_impresora', '').upper()
         update.modelo = request.POST.get('modelo_toner', '').upper()
         update.numero_recarga_maxima = request.POST.get('numero_recarga', '').upper()
-        update.client.update = clients.objects.get(id=request.POST.get('cliente0', ''))
-        clients.objects.filter(id=request.POST.get('cliente0', '')).update(id=bar.id)
+        update.client = clients.objects.get(id=request.POST.get('clientselect', ''))
         update.descripcion = request.POST.get('descripcion', '').upper()
         update.observaciones = request.POST.get('observaciones', '').upper()
         update.save()
