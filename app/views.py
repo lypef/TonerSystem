@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
+import datetime
 from models import clients, cartridges
 
 # Create your views here.
@@ -103,8 +103,6 @@ def list_clients_edit(request):
         messages.add_message(request, messages.INFO, e)
         return redirect ('/list_clients') 
     
-
-
 @login_required
 def list_clients_delete(request):
     try:
@@ -142,7 +140,12 @@ def newcartridges(request):
                     numero_recarga_maxima = request.POST.get('numero_recarga', ''), 
                     client = clients.objects.get(id=request.POST.get('cliente', '')), 
                     descripcion = request.POST.get('descripcion', '').upper(), 
-                    observaciones = request.POST.get('observaciones', '').upper()
+                    observaciones = request.POST.get('observaciones', '').upper(),
+                    cilindro_drum = 0,
+                    rodillo_magnetico = 0,
+                    rodillo_carga = 0,
+                    cuchilla_impiadora = 0,
+                    cuchilla_dosificadora = 0
                 )
                 insert.save()
                 messages.add_message(request, messages.INFO, 'Cartucho agregado con exito')
@@ -219,10 +222,70 @@ def list_cartridges_delete(request):
 
 @login_required
 def recharge_cartridge(request):
-    messages.add_message(request, messages.INFO, 'Recarga normal')
-    return redirect ('/list_cartridges')
+    
+    try:
+        errors = []
+        update = cartridges.objects.get(id=request.POST.get('id', ''))
+        
+        if update.cilindro_drum + 1 <= update.numero_recarga_maxima:
+            update.cilindro_drum = update.cilindro_drum + 1
+        else: 
+            errors.append('error') 
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Drum]')
 
+        if update.rodillo_magnetico + 1 <= update.numero_recarga_maxima:
+            update.rodillo_magnetico = update.rodillo_magnetico + 1
+        else:
+            errors.append('error')  
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Rodillo magnetico]')
+
+        if update.rodillo_carga + 1 <= update.numero_recarga_maxima:
+            update.rodillo_carga = update.rodillo_carga + 1
+        else:
+            errors.append('error')  
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Rodillo de carga]')
+
+        if update.cuchilla_impiadora + 1 <= update.numero_recarga_maxima:
+            update.cuchilla_impiadora = update.cuchilla_impiadora + 1
+        else:
+            errors.append('error')  
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Cuchilla limpiadora]')    
+
+        if update.cuchilla_dosificadora + 1 <= update.numero_recarga_maxima:
+            update.cuchilla_dosificadora = update.cuchilla_dosificadora + 1
+        else:
+            errors.append('error')  
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Cuchilla dosificadora]')        
+        
+            
+        if not errors:
+            update.fecha_ultimo_servcio = datetime.datetime.now()
+            update.save()
+            messages.add_message(request, messages.INFO, 'Cartucho recargado con exito')
+            return redirect ('/list_cartridges')
+        else:
+            return redirect ('/list_cartridges')
+            
+
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_cartridges')
+    
 @login_required
 def restore_cartridge(request):
-    messages.add_message(request, messages.INFO, 'Remanufacturado')
-    return redirect ('/list_cartridges')
+    try:
+        update = cartridges.objects.get(id=request.POST.get('id', ''))
+        update.cilindro_drum = 1
+        update.rodillo_magnetico = 1
+        update.rodillo_carga = 1
+        update.cuchilla_impiadora = 1
+        update.cuchilla_dosificadora = 1
+        update.save()
+        
+        messages.add_message(request, messages.INFO, 'Cartucho remanufacturado con exito')
+        return redirect ('/list_cartridges')
+        
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_cartridges')
+        
