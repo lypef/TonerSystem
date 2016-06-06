@@ -119,6 +119,7 @@ def list_clients_delete(request):
 @login_required
 def newcartridges(request):
     Lclients = clients.objects.all().order_by('nombre')
+    
 
     if request.method == 'POST':
         errors = []
@@ -128,6 +129,7 @@ def newcartridges(request):
         if not request.POST.get('cliente', ''): 
             errors.append('error')
             messages.add_message(request, messages.INFO, 'Seleccione un cliente')
+        
         if not request.POST.get('numero_recarga', ''): 
             errors.append('error')
             messages.add_message(request, messages.INFO, 'Ingrese un numero maximo de recargas')
@@ -162,7 +164,8 @@ def newcartridges(request):
         'numero_recarga': request.POST.get('numero_recarga', ''),
         'descripcion': request.POST.get('descripcion', ''),
         'observaciones': request.POST.get('observaciones', ''),
-        'Lclients': Lclients
+        'Lclients': Lclients, 
+        
         }) 
 
 @login_required
@@ -261,7 +264,7 @@ def recharge_cartridge(request):
         if not errors:
             update.fecha_ultimo_servcio = datetime.datetime.now()
             update.save()
-            messages.add_message(request, messages.INFO, 'Cartucho recargado con exito')
+            messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] recargado con exito')
             return redirect ('/list_cartridges')
         else:
             return redirect ('/list_cartridges')
@@ -282,7 +285,7 @@ def restore_cartridge(request):
         update.cuchilla_dosificadora = 1
         update.save()
         
-        messages.add_message(request, messages.INFO, 'Cartucho remanufacturado con exito')
+        messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] remanufacturado con exito')
         return redirect ('/list_cartridges')
         
     except Exception, e:

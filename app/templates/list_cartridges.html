@@ -10,7 +10,7 @@
           <tr>
               <th data-field="price">CLIENTE</th>
               <th data-field="id"><center>FOLIO</center></th>
-              <th data-field="name"><CENTER>MODELO</CENTER></th>
+              <th data-field="name"><CENTER>EMPRESA</CENTER></th>
               <th data-field="price"><center>ULTIMO SERVICIO</center></th>
               <th></th>
               <th></th>
@@ -22,9 +22,21 @@
         {% for client in Lclients %}
           <tr>
             <td>{{client.client.nombre}}</td>
-            <td><center>{{client.id}}</center></td>
-            <td><center>{{client.modelo}}</center></td>
-            <td><center>{{client.fecha_ultimo_servcio}}</center></td>
+            <td><center>
+            
+            {% if client.cilindro_drum == 0 %}
+              <div class="card-panel yellow">{{client.id}}<br><i class="material-icons">shuffle</i></div>
+            {% elif client.cilindro_drum < client.numero_recarga_maxima %}
+              <div class="card-panel green">{{client.id}}<br><i class="material-icons">done</i></div>
+            {%else%}
+              <div class="card-panel red">{{client.id}}<br><i class="material-icons">close</i></div>
+            {%endif%}  
+            </center>
+
+            </td>
+            <td><center>{{client.client.empresa}}</center></td>
+            <td><center>{{client.fecha_ultimo_servcio}}
+            </center></td>
               
               <!-- form service -->
             <td>

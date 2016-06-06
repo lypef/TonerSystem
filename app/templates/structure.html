@@ -49,11 +49,15 @@
       <ul class="right hide-on-med-and-down">
         
         <li>
-          <form>
+
+
+
+          <form action="/list_cartridges" method="POST"> {% csrf_token %}
             <div class="input-field">
-              <input id="search" type="search" required>
+              <input id="search" type="search" name="code" required>
               <label for="search"><i class="material-icons">search</i></label>
               <i class="material-icons">close</i>
+
             </div>
           </form>
         </li>
@@ -201,7 +205,7 @@
       $('.modal-trigger').leanModal();
     });
    </script>
-  <!-- Modal search -->
+  <!-- Modal search cartridges -->
   <div id="modalsearch" class="modal">
     <div class="modal-content">
       <span class="black-text">

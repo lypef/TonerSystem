@@ -27,13 +27,16 @@
           <input id="icon_prefix" type="number" class="validate" placeholder="Numero de recargas maxima" name="numero_recarga" value="{{numero_recarga}}"></input>
         </div>
 
-
 		<div class="input-field col s12 l6">
 		    <select name="cliente">
-		      <option disabled selected>Cliente</option>
-		      
+		      <option  disabled selected>Cliente</option>
+
 		      {% for client in Lclients %}
-		      	<option value="{{client.id}}">{{client.nombre}} ({{client.empresa}}) ({{client.direccion}})</option>
+
+		      	
+		      		<option value="{{client.id}}" {% if client.id == idclient  %} selected {% endif %}>{{client.nombre}} ({{client.empresa}}) ({{client.direccion}})</option>
+		      	
+
 		      {% endfor %}
 
 		    </select>
