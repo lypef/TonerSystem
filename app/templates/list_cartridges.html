@@ -53,7 +53,53 @@
                       <button type="submit" class="modal-action modal-close waves-effect  btn-flat left" name="id" value="{{client.id}}">RECARGA NORMAL<i class="material-icons right">replay</i></button>
                       </div>
             </form>
-                      
+                    <form>
+                      <div class="card-panel teal">
+                        <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" value="{{ client.cilindro_drum }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CILINDRO-DRUM]</label>
+          </div>            
+          
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text"  value="{{ client.rodillo_magnetico }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO MAGNETICO]</label>
+          </div>            
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text"  value="{{ client.rodillo_carga }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO DE CARGA]</label>
+          </div>                      
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text"  value="{{ client.cuchilla_impiadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA LIMPIADORA]</label>
+          </div>
+
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" value="{{ client.cuchilla_dosificadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA DOSIFICADORA]</label>
+          </div>
+
+
+          <div class="input-field col s6">
+          <i class="material-icons prefix white-text">mode_edit</i>
+          <textarea id="icon_prefix2" class="materialize-textarea black-text">{{ client.observaciones }}</textarea>
+          <label class="black-text" for="icon_prefix2">OBSERVACIONES</label>
+          </div>
+
+          
+          <button type="submit" class="modal-close btn waves-effect waves-light red" name="id" value="{{client.id}}">GUARDAR <i class="material-icons right">save</i></button>
+          
+
+
+                      </div>
+                    </form>  
 
                       <form action="/restore_cartridge" method="POST"> {% csrf_token %}
                         <div class="modal-footer">
@@ -78,6 +124,43 @@
               
         <div class="modal-content">
           
+          <div class="col s12 m5">
+        <div class="card-panel teal">
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.cilindro_drum }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CILINDRO-DRUM]</label>
+          </div>            
+          
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.rodillo_magnetico }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO MAGNETICO]</label>
+          </div>            
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.rodillo_carga }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO DE CARGA]</label>
+          </div>                      
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.cuchilla_impiadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA LIMPIADORA]</label>
+          </div>
+
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ client.cuchilla_dosificadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA DOSIFICADORA]</label>
+          </div>
+        </div>
+      </div>
+
+
+      
           <div class="col s12 m5">
         <div class="card-panel teal">
             <div class="input-field col s12">
@@ -131,46 +214,6 @@
           </div>
         </div>
       </div>
-
-
-
-
-
-      <div class="col s12 m5">
-        <div class="card-panel teal">
-          <div class="input-field col s12">
-          <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text" disabled value="{{ client.cilindro_drum }}" id="disabled" type="text" class="validate">
-          <label class="black-text" for="disabled">NUMERO DE USOS [CILINDRO-DRUM]</label>
-          </div>            
-          
-          <div class="input-field col s12">
-          <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text" disabled value="{{ client.rodillo_magnetico }}" id="disabled" type="text" class="validate">
-          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO MAGNETICO]</label>
-          </div>            
-
-          <div class="input-field col s12">
-          <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text" disabled value="{{ client.rodillo_carga }}" id="disabled" type="text" class="validate">
-          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO DE CARGA]</label>
-          </div>                      
-
-          <div class="input-field col s12">
-          <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text" disabled value="{{ client.cuchilla_impiadora }}" id="disabled" type="text" class="validate">
-          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA LIMPIADORA]</label>
-          </div>
-
-
-          <div class="input-field col s12">
-          <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text" disabled value="{{ client.cuchilla_dosificadora }}" id="disabled" type="text" class="validate">
-          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA DOSIFICADORA]</label>
-          </div>
-        </div>
-      </div>
-
           
                 <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
@@ -221,7 +264,7 @@
           <option disabled selected>Cliente</option>
           
           {% for client0 in Lclients0 %}
-            <option value="{{client0.id}}">{{client0.nombre}} ({{client0.empresa}}) ({{client0.direccion}})</option>
+            <option value="{{client0.id}}" {% if client0.id == client.client.id %} selected {%endif%}>{{client0.nombre}} ({{client0.empresa}}) ({{client0.direccion}})</option>
           {% endfor %}
 
         </select>

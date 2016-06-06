@@ -120,16 +120,19 @@ def list_clients_delete(request):
 def newcartridges(request):
     Lclients = clients.objects.all().order_by('nombre')
     
+    if request.method == 'GET':
+        return render(request, 'newcartridges.html',{'Lclients': Lclients,})
 
     if request.method == 'POST':
         errors = []
         if not request.POST.get('modelo_toner', ''): 
             errors.append('error') 
             messages.add_message(request, messages.INFO, 'Ingrese el modelo')
+
         if not request.POST.get('cliente', ''): 
             errors.append('error')
             messages.add_message(request, messages.INFO, 'Seleccione un cliente')
-        
+            
         if not request.POST.get('numero_recarga', ''): 
             errors.append('error')
             messages.add_message(request, messages.INFO, 'Ingrese un numero maximo de recargas')
@@ -155,22 +158,30 @@ def newcartridges(request):
             except Exception, e:
                 messages.add_message(request, messages.INFO, e)
 
-    
-    
-
-    return render(request, 'newcartridges.html', {
+        if  request.POST.get('cliente', '').isdigit() == True:
+            return render(request, 'newcartridges.html', {
         'modelo_impresora': request.POST.get('modelo_impresora', ''),
         'modelo_toner': request.POST.get('modelo_toner', ''),
         'numero_recarga': request.POST.get('numero_recarga', ''),
         'descripcion': request.POST.get('descripcion', ''),
         'observaciones': request.POST.get('observaciones', ''),
         'Lclients': Lclients, 
-        
+        'idclient': clients.objects.get(id=request.POST.get('cliente', '')).id 
         }) 
+        else:
+            return render(request, 'newcartridges.html', {
+        'modelo_impresora': request.POST.get('modelo_impresora', ''),
+        'modelo_toner': request.POST.get('modelo_toner', ''),
+        'numero_recarga': request.POST.get('numero_recarga', ''),
+        'descripcion': request.POST.get('descripcion', ''),
+        'observaciones': request.POST.get('observaciones', ''),
+        'Lclients': Lclients
+        })
+
 
 @login_required
 def list_cartridges(request):
-    Lclients = clients.objects.all()
+    Lclients = clients.objects.all().order_by('nombre')
 
     if request.method == "GET":
         Lcartridges = cartridges.objects.all().order_by('-id')   
@@ -203,7 +214,7 @@ def list_cartridges_edit(request):
         update.observaciones = request.POST.get('observaciones', '').upper()
         update.save()
         
-        messages.add_message(request, messages.INFO, 'Cartucho editado con exito')
+        messages.add_message(request, messages.INFO, 'Cartucho [' + request.POST.get('id', '') + '] editado con exito')
         return redirect ('/list_cartridges') 
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
@@ -263,6 +274,7 @@ def recharge_cartridge(request):
             
         if not errors:
             update.fecha_ultimo_servcio = datetime.datetime.now()
+            update.observaciones += "\n\n - Se realizo recarga de toner con exito. " + str(datetime.datetime.now()) 
             update.save()
             messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] recargado con exito')
             return redirect ('/list_cartridges')
@@ -283,6 +295,8 @@ def restore_cartridge(request):
         update.rodillo_carga = 1
         update.cuchilla_impiadora = 1
         update.cuchilla_dosificadora = 1
+        update.descripcion = ""
+        update.observaciones = " - Se realizo remanufactura y recarga con exito." + str(datetime.datetime.now()) 
         update.save()
         
         messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] remanufacturado con exito')
