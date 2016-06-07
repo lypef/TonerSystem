@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from app import views
 
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -26,8 +27,10 @@ urlpatterns = patterns('',
     url(r'^list_cartridges_edit$', views.list_cartridges_edit, name='list_cartridges_edit'),
     url(r'^list_cartridges_delete$', views.list_cartridges_delete, name='list_cartridges_delete'),
     url(r'^recharge_cartridge$', views.recharge_cartridge, name='recharge_cartridge'),
-    url(r'^restore_cartridge$', views.restore_cartridge, name='restore_cartridge')
-
+    url(r'^restore_cartridge$', views.restore_cartridge, name='restore_cartridge'),
+    url(r'^list_cartridges_service_edit$', views.list_cartridges_service_edit, name='list_cartridges_service_edit'),
+    url(r'^list_cartridges_clients/(?P<clientid>[^/]+)/$', views.list_cartridges_clients , name='list_cartridges_clients ')
+    
 )
 
 

@@ -53,43 +53,45 @@
                       <button type="submit" class="modal-action modal-close waves-effect  btn-flat left" name="id" value="{{client.id}}">RECARGA NORMAL<i class="material-icons right">replay</i></button>
                       </div>
             </form>
-                    <form>
+            <!-- form edit dentro de service-->
+          <form action="/list_cartridges_service_edit" method="POST"> {% csrf_token %}
+
                       <div class="card-panel teal">
                         <div class="input-field col s12">
           <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text" value="{{ client.cilindro_drum }}" id="disabled" type="text" class="validate">
+          <input class="black-text" value="{{ client.cilindro_drum }}" id="disabled" type="number" class="validate" name="drum">
           <label class="black-text" for="disabled">NUMERO DE USOS [CILINDRO-DRUM]</label>
           </div>            
           
           <div class="input-field col s12">
           <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text"  value="{{ client.rodillo_magnetico }}" id="disabled" type="text" class="validate">
+          <input class="black-text"  value="{{ client.rodillo_magnetico }}" id="disabled" type="number" class="validate" name="rmagnetico">
           <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO MAGNETICO]</label>
           </div>            
 
           <div class="input-field col s12">
           <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text"  value="{{ client.rodillo_carga }}" id="disabled" type="text" class="validate">
+          <input class="black-text"  value="{{ client.rodillo_carga }}" id="disabled" type="number" class="validate" name="rcarga">
           <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO DE CARGA]</label>
           </div>                      
 
           <div class="input-field col s12">
           <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text"  value="{{ client.cuchilla_impiadora }}" id="disabled" type="text" class="validate">
+          <input class="black-text"  value="{{ client.cuchilla_impiadora }}" id="disabled" type="number" class="validate" name="cclean">
           <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA LIMPIADORA]</label>
           </div>
 
 
           <div class="input-field col s12">
           <i class="material-icons prefix white-text">account_circle</i>
-          <input class="black-text" value="{{ client.cuchilla_dosificadora }}" id="disabled" type="text" class="validate">
+          <input class="black-text" value="{{ client.cuchilla_dosificadora }}" id="disabled" type="number" class="validate" name="cdosificadora">
           <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA DOSIFICADORA]</label>
           </div>
 
 
           <div class="input-field col s6">
           <i class="material-icons prefix white-text">mode_edit</i>
-          <textarea id="icon_prefix2" class="materialize-textarea black-text">{{ client.observaciones }}</textarea>
+          <textarea id="icon_prefix2" class="materialize-textarea black-text" name="observaciones">{{ client.observaciones }}</textarea>
           <label class="black-text" for="icon_prefix2">OBSERVACIONES</label>
           </div>
 
@@ -100,7 +102,7 @@
 
                       </div>
                     </form>  
-
+          <!-- fin form edit dentro de service-->
                       <form action="/restore_cartridge" method="POST"> {% csrf_token %}
                         <div class="modal-footer">
                           <button type="submit" class="modal-action modal-close waves-effect  btn-flat" name="id" value="{{client.id}}">REMANUFACTURAR<i class="material-icons right">settings_backup_restore</i></button>

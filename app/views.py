@@ -274,7 +274,7 @@ def recharge_cartridge(request):
             
         if not errors:
             update.fecha_ultimo_servcio = datetime.datetime.now()
-            update.observaciones += "\n\n - Se realizo recarga de toner con exito. " + str(datetime.datetime.now()) 
+            update.observaciones += "\n\n - SE REALIZO RECARGA DE TONER CON EXITO. " + str(datetime.datetime.now()) 
             update.save()
             messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] recargado con exito')
             return redirect ('/list_cartridges')
@@ -296,7 +296,8 @@ def restore_cartridge(request):
         update.cuchilla_impiadora = 1
         update.cuchilla_dosificadora = 1
         update.descripcion = ""
-        update.observaciones = " - Se realizo remanufactura y recarga con exito." + str(datetime.datetime.now()) 
+        update.observaciones = " - SE REALIZO REMANUFACTURA Y RECARGA CON EXITO." + str(datetime.datetime.now()) 
+        update.fecha_ultimo_servcio = datetime.datetime.now()
         update.save()
         
         messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] remanufacturado con exito')
@@ -306,3 +307,28 @@ def restore_cartridge(request):
         messages.add_message(request, messages.INFO, e)
         return redirect ('/list_cartridges')
         
+@login_required
+def list_cartridges_service_edit(request):
+    try:
+        update = cartridges.objects.get(id=request.POST.get('id', ''))
+        update.cilindro_drum = request.POST.get('drum','')
+        update.rodillo_magnetico = request.POST.get('rmagnetico','')
+        update.rodillo_carga = request.POST.get('rcarga','')
+        update.cuchilla_impiadora = request.POST.get('cclean','')
+        update.cuchilla_dosificadora  = request.POST.get('cdosificadora','')
+        update.observaciones = request.POST.get('observaciones','').upper() + ' ' +str(datetime.datetime.now()) 
+
+        update.save()
+        
+        messages.add_message(request, messages.INFO, 'Cartucho [' + request.POST.get('id', '') + '] editado con exito')
+        return redirect ('/list_cartridges') 
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_cartridges')             
+
+
+@login_required
+def list_cartridges_clients(request, clientid):
+    Lcartridges = cartridges.objects.filter(client=clientid)
+    return render (request,'list_cartridges_clients.html',
+        {'Lcartridges':Lcartridges})

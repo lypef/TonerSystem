@@ -1,0 +1,149 @@
+{% extends 'structure.html' %}
+
+{% block title%} Generar codigo {% endblock %}
+{% block slider %}{% endblock %}
+{% block body %} 
+
+     <table class="responsive-table striped black-text">
+        <thead>
+          <tr>
+              <th data-field="price">CLIENTE</th>
+              <th data-field="id"><center>FOLIO</center></th>
+              <th data-field="name"><center>ULTIMO SERVICIO</center></th>
+              <th data-field="price"><center>M-CARTUCHO</center></th>
+              <th data-field="price"><center>M-IMPRESORA</center></th>
+              <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for cartridge in Lcartridges %}    
+            <tr>
+              <td>{{cartridge.client.nombre}}</td>
+              <td><center>{{cartridge.id}}</center></td>
+              <td><center>{{cartridge.fecha_ultimo_servcio}}</center></td>
+              <td><center>{{cartridge.modelo}}</center></td>
+              <td><center>{{cartridge.modelo_imp}}</center></td>
+              <td>
+                <!-- form view -->
+            <td>
+            <form>
+            {% if cartridge.cilindro_drum == 0 %}
+              <a class="waves-effect waves-light btn yellow accent-4 modal-trigger" name="{{ cartridge.id }}" href="#modalview{{cartridge.id}}"><i class="material-icons left">visibility</i>Detalles</a>
+            {% elif cartridge.cilindro_drum < cartridge.numero_recarga_maxima %}
+              <a class="waves-effect waves-light btn green modal-trigger" name="{{ cartridge.id }}" href="#modalview{{cartridge.id}}"><i class="material-icons left">visibility</i>Detalles</a>
+            {%else%}
+              <a class="waves-effect waves-light btn red modal-trigger" name="{{ cartridge.id }}" href="#modalview{{cartridge.id}}"><i class="material-icons left">visibility</i>Detalles</a>
+            {%endif%}  
+            </td>
+
+            <div id="modalview{{cartridge.id}}" class="modal">
+              
+        <div class="modal-content">
+          
+          <div class="col s12 m5">
+        <div class="card-panel teal">
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.cilindro_drum }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CILINDRO-DRUM]</label>
+          </div>            
+          
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.rodillo_magnetico }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO MAGNETICO]</label>
+          </div>            
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.rodillo_carga }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [RODILLO DE CARGA]</label>
+          </div>                      
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.cuchilla_impiadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA LIMPIADORA]</label>
+          </div>
+
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.cuchilla_dosificadora }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO DE USOS [CUCHILLA DOSIFICADORA]</label>
+          </div>
+        </div>
+      </div>
+
+
+      
+          <div class="col s12 m5">
+        <div class="card-panel teal">
+            <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" class="black-text" disabled value="{{ cartridge.client.nombre }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">CLIENTE</label>
+          </div>
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.modelo_imp }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">MODELO DE IMPRESORA</label>
+          </div>
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.modelo }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">MODELO DE CARTUCCHO</label>
+          </div>          
+
+          <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.numero_recarga_maxima }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">NUMERO MAXIMO DE RECARGAS</label>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="col s12 m5">
+        <div class="card-panel teal">
+            <div class="input-field col s12">
+          <i class="material-icons prefix white-text">account_circle</i>
+          <input class="black-text" disabled value="{{ cartridge.fecha_ultimo_servcio }}" id="disabled" type="text" class="validate">
+          <label class="black-text" for="disabled">FECHA DE ULTIMO SERVICIO</label>
+          </div> 
+
+          <div class="input-field col s6">
+          <i class="material-icons prefix white-text">mode_edit</i>
+          <textarea disabled id="icon_prefix2" class="materialize-textarea black-text">{{ cartridge.descripcion }}</textarea>
+          <label class="black-text" for="icon_prefix2">DESCRIPCION</label>
+          </div>
+
+          <div class="input-field col s6">
+          <i class="material-icons prefix white-text">mode_edit</i>
+          <textarea disabled id="icon_prefix2" class="materialize-textarea black-text">{{ cartridge.observaciones }}</textarea>
+          <label class="black-text" for="icon_prefix2">OBSERVACIONES</label>
+          </div>
+        </div>
+      </div>
+          
+                <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+                </div>
+
+        </div>
+          </form>  
+          </td>
+          <!-- fin view -->
+              </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+          
+{% endblock %}

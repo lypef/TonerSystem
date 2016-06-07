@@ -27,7 +27,15 @@
             <td>
             <!-- form view -->
             <form>
-            <a class="waves-effect waves-light btn green modal-trigger" name="{{ client.id }}" href="#modalview{{client.id}}"><i class="material-icons left">visibility</i>Detalles</a>
+            <!-- Dropdown Trigger -->
+            <a class='dropdown-button btn green' data-activates='dropdown1{{client.id}}'><i class="material-icons left">visibility</i>Visualizar</a>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1{{client.id}}' class='dropdown-content'>
+              <li><a class="modal-trigger" href="#modalview{{client.id}}">Cliente</a></li>
+              <li><a href="/list_cartridges_clients/{{client.id}}">Cartuchos</a></li>
+            </ul>
+
             </td>
 
             <div id="modalview{{client.id}}" class="modal">

@@ -1,10 +1,12 @@
 <html>
 <head>
 	<title>{% block title %} {%endblock%}</title>
+  {% load staticfiles %}
+
   {% include 'material/includes/material_css.html' %}
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
   {% include 'material/includes/material_js.html' %}
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 </head>
 	<body class="teal">
@@ -34,11 +36,10 @@
   </ul>
 
   <nav class="teal" role="navigation">
-  <ul id="Mostrar" class="dropdown-content">
-  <li><a href="#!">Cartuchos en servicio</a></li>
-  <li><a href="#!">Fin de vida util</a></li>
-  <li><a href="#">Status general</a></li>
-  <li><a href="#">Clientes</a></li>
+  <ul id="ListShow" class="dropdown-content">
+  <li><a href="/newclient">C-sin servicio</a></li>
+  <li><a href="/list_clients">Gestionar</a></li>
+  <li><a href="#ModalSearchClients" class="modal-trigger">Consultar</a></li>
   </ul>
 
     <div class="nav-wrapper">
@@ -62,10 +63,10 @@
           </form>
         </li>
 
-        <li><a class="dropdown-button" href="#!" data-activates="Mostrar
+        <li><a class="dropdown-button" href="#!" data-activates="ListShow
         ">Mostrar
-        <i class="material-icons left">view_module</i><i class="mdi-hardware-keyboard-arrow-down right"></i></a></li>
-        
+        <i class="mdi-action-dashboard left"></i><i class="mdi-hardware-keyboard-arrow-down right"></i></a></li>
+
 
         <li><a class="dropdown-button" href="#!" data-activates="ListClientes
         ">Clientes
