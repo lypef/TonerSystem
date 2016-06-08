@@ -19,7 +19,7 @@
         <tbody>
           {% for cartridge in Lcartridges %}    
             <tr>
-              <td>{{cartridge.client.nombre}}</td>
+              <td>{{cartridge.client.nombre|slice:'0:50'}}</td>
               <td><center>{{cartridge.id}}</center></td>
               <td><center>{{cartridge.fecha_ultimo_servcio}}</center></td>
               <td><center>{{cartridge.modelo}}</center></td>

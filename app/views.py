@@ -245,31 +245,31 @@ def recharge_cartridge(request):
             update.cilindro_drum = update.cilindro_drum + 1
         else: 
             errors.append('error') 
-            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Drum]')
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Drum] - Cartucho ['  + request.POST.get('id','')+ ']')
 
         if update.rodillo_magnetico + 1 <= update.numero_recarga_maxima:
             update.rodillo_magnetico = update.rodillo_magnetico + 1
         else:
             errors.append('error')  
-            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Rodillo magnetico]')
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Rodillo magnetico] - Cartucho ['  + request.POST.get('id','')+ ']')
 
         if update.rodillo_carga + 1 <= update.numero_recarga_maxima:
             update.rodillo_carga = update.rodillo_carga + 1
         else:
             errors.append('error')  
-            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Rodillo de carga]')
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Rodillo de carga] - Cartucho ['  + request.POST.get('id','')+ ']')
 
         if update.cuchilla_impiadora + 1 <= update.numero_recarga_maxima:
             update.cuchilla_impiadora = update.cuchilla_impiadora + 1
         else:
             errors.append('error')  
-            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Cuchilla limpiadora]')    
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Cuchilla limpiadora] - Cartucho ['  + request.POST.get('id','')+ ']')    
 
         if update.cuchilla_dosificadora + 1 <= update.numero_recarga_maxima:
             update.cuchilla_dosificadora = update.cuchilla_dosificadora + 1
         else:
             errors.append('error')  
-            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Cuchilla dosificadora]')        
+            messages.add_message(request, messages.INFO, 'Es necesario cambiar [Cuchilla dosificadora] - Cartucho ['  + request.POST.get('id','')+ ']')        
         
             
         if not errors:
