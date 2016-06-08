@@ -1,0 +1,11 @@
+{% extends 'structure.html' %}
+
+{% block title%} Generar codigo {% endblock %}
+{% block slider %}{% endblock %}
+{% block body %} 
+
+    {% for cartridge in Lcartridges %}
+      {{cartridge.id}}<br>
+    {% endfor %}
+            
+{% endblock %}
