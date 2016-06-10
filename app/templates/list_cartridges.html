@@ -21,7 +21,7 @@
         <tbody>
         {% for client in Lclients %}
           <tr>
-            <td>{{client.client.nombre|slice:'0:35'}}</td>
+            <td>{{client.client.nombre|slice:'0:30'}}</td>
             <td><center>
             
             {% if client.cilindro_drum == 0 %}
@@ -49,6 +49,8 @@
 
                   <div class="modal-content">
                     
+                    <input type="hidden" name="url" value="/list_cartridges/{{client.id}}">
+
                       <div class="modal-footer">
                       <button type="submit" class="modal-action modal-close waves-effect  btn-flat left" name="id" value="{{client.id}}">RECARGA NORMAL<i class="material-icons right">replay</i></button>
                       </div>
@@ -95,7 +97,8 @@
           <label class="black-text" for="icon_prefix2">OBSERVACIONES</label>
           </div>
 
-          
+          <input type="hidden" name="url" value="/list_cartridges/{{client.id}}">
+
           <button type="submit" class="modal-close btn waves-effect waves-light red" name="id" value="{{client.id}}">GUARDAR <i class="material-icons right">save</i></button>
           
 
@@ -105,6 +108,7 @@
           <!-- fin form edit dentro de service-->
                       <form action="/restore_cartridge" method="POST"> {% csrf_token %}
                         <div class="modal-footer">
+                          <input type="hidden" name="url" value="/list_cartridges/{{client.id}}">
                           <button type="submit" class="modal-action modal-close waves-effect  btn-flat" name="id" value="{{client.id}}">REMANUFACTURAR<i class="material-icons right">settings_backup_restore</i></button>
                         </div>                        
                       </form>
@@ -266,7 +270,7 @@
           <option disabled selected>Cliente</option>
           
           {% for client0 in Lclients0 %}
-            <option value="{{client0.id}}" {% if client0.id == client.client.id %} selected {%endif%}>{{client0.nombre}} ({{client0.empresa}}) ({{client0.direccion}})</option>
+            <option value="{{client0.id}}" {% if client0.id == client.client.id %} selected {%endif%}>{{client0.nombre|slice:'0:30'}} ({{client0.empresa|slice:'0:20'}}) ({{client0.direccion|slice:'0:10'}})</option>
           {% endfor %}
 
         </select>
@@ -286,7 +290,8 @@
           <label for="icon_prefix2">Observaciones</label>
         </div>
       
-
+        <input type="hidden" name="url" value="/list_cartridges/{{client.id}}">
+        
         <div class="modal-footer">
 
                 <button type="submit" class="modal-close btn waves-effect waves-light" name="id" value="{{client.id}}">GUARDAR <i class="material-icons right">save</i></button>

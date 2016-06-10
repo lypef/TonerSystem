@@ -203,6 +203,14 @@ def list_cartridges(request):
     return render (request,'list_cartridges.html',{'Lclients':Lcartridges, 'Lclients0': Lclients})
 
 @login_required
+def list_cartridges_id(request,id):
+    Lclients = clients.objects.all().order_by('nombre')
+
+    Lcartridges = cartridges.objects.filter(id=id).order_by('id')
+    
+    return render (request,'list_cartridges.html',{'Lclients':Lcartridges, 'Lclients0': Lclients})    
+
+@login_required
 def list_cartridges_edit(request):
     try:
         update = cartridges.objects.get(id=request.POST.get('id', ''))
@@ -215,10 +223,10 @@ def list_cartridges_edit(request):
         update.save()
         
         messages.add_message(request, messages.INFO, 'Cartucho [' + request.POST.get('id', '') + '] editado con exito')
-        return redirect ('/list_cartridges') 
+        return redirect (request.POST.get('url', '')) 
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
-        return redirect ('/list_cartridges')     
+        return redirect (request.POST.get('url', ''))     
 
 
 @login_required
@@ -279,12 +287,12 @@ def recharge_cartridge(request):
             messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] recargado con exito')
             return redirect ('/list_cartridges')
         else:
-            return redirect ('/list_cartridges')
+            return redirect (request.POST.get('url',''))
             
 
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
-        return redirect ('/list_cartridges')
+        return redirect (request.POST.get('url',''))
     
 @login_required
 def restore_cartridge(request):
@@ -301,11 +309,11 @@ def restore_cartridge(request):
         update.save()
         
         messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] remanufacturado con exito')
-        return redirect ('/list_cartridges')
+        return redirect (request.POST.get('url',''))
         
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
-        return redirect ('/list_cartridges')
+        return redirect (request.POST.get('url',''))
         
 @login_required
 def list_cartridges_service_edit(request):
@@ -321,10 +329,10 @@ def list_cartridges_service_edit(request):
         update.save()
         
         messages.add_message(request, messages.INFO, 'Cartucho [' + request.POST.get('id', '') + '] editado con exito')
-        return redirect ('/list_cartridges') 
+        return redirect (request.POST.get('url', '')) 
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
-        return redirect ('/list_cartridges')             
+        return redirect (request.POST.get('url', ''))             
 
 
 @login_required
@@ -335,10 +343,16 @@ def list_cartridges_clients(request, clientid):
 
 @login_required
 def select_tag_cartridges(request, select):
+    Lclients = clients.objects.all().order_by('nombre')
+
     if select == 'green':
         Lcartridges = cartridges.objects.filter(cilindro_drum = 1 )
+        messages.add_message(request, messages.INFO, 'Es verde')
     elif select == 'yellow':
         messages.add_message(request, messages.INFO, 'Es amarillo')
+        Lcartridges = cartridges.objects.filter(cilindro_drum = 0 )
     elif select == 'red':
         messages.add_message(request, messages.INFO, 'Es rojo')        
-    return render (request,'select_tag_cartridges.html',{'Lcartridges':Lcartridges})
+        Lcartridges = cartridges.objects.filter(cilindro_drum = 1 )
+    
+    return render (request,'list_cartridges.html',{'Lclients':Lcartridges, 'Lclients0': Lclients})
