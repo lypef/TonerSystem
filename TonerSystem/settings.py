@@ -61,9 +61,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'lypef_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        #'HOST': 'postgresql-lypef.alwaysdata.net',
+        'USER': 'lypef',
+        'PASSWORD': 'Asc3nciomast3r',
+        'HOST': 'postgresql-lypef.alwaysdata.net',
     }
 }
 
