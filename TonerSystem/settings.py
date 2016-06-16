@@ -58,12 +58,14 @@ WSGI_APPLICATION = 'TonerSystem.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'default': 
+    {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lypef_db',
-        'USER': 'lypef',
-        'PASSWORD': 'Asc3nciomast3r',
-        'HOST': 'postgresql-lypef.alwaysdata.net',
+        'NAME': 'dfh45gm2dq93ht',
+        'USER': 'gfpjqvkyusydlr',
+        'PASSWORD': '9-3-3oCUyMTaKeAmK5gCNkMedb',
+        'HOST': 'ec2-54-83-25-238.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -80,7 +82,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = '/TonerSystem/public/static/'
+
 STATIC_URL = '/static/'
 
 
