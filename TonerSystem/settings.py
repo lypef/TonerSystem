@@ -82,7 +82,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+STATIC_ROOT = '/static/'
 STATIC_URL = '/static/'
 
 
