@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '3*%by69%jtqt*@j-c0_4ogqy)7ovhz!kr(qqx2w+#dy8(ql#n%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = TRUE
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -72,7 +72,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-es'
 
 TIME_ZONE = 'America/Mexico_City'
 
@@ -82,7 +82,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 STATIC_URL = '/static/'
 
 
