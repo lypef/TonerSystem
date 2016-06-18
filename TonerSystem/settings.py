@@ -58,12 +58,14 @@ WSGI_APPLICATION = 'TonerSystem.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'lypef_db',
-        'USER': 'lypef',
-        'PASSWORD': 'admin',
-        'HOST': 'mysql-lypef.alwaysdata.net',
+    'default': 
+    {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dfh45gm2dq93ht',
+        'USER': 'gfpjqvkyusydlr',
+        'PASSWORD': '9-3-3oCUyMTaKeAmK5gCNkMedb',
+        'HOST': 'ec2-54-83-25-238.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
@@ -80,19 +82,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
-
-# Extra places for collectstatic to find static files.
-STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, 'static'),
-)
 
 
 from django.core.urlresolvers import reverse_lazy
