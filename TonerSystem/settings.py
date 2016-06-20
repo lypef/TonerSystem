@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '3*%by69%jtqt*@j-c0_4ogqy)7ovhz!kr(qqx2w+#dy8(ql#n%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 
@@ -83,8 +83,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = '/home/lypef/TonerSystem/public/'
-STATIC_URL = '/home/lypef/TonerSystem/public/'
+STATIC_ROOT = os.path.join(BASE_DIR+'/public/')
+STATIC_URL = os.path.join(BASE_DIR+'/public/')
 
 
 from django.core.urlresolvers import reverse_lazy
