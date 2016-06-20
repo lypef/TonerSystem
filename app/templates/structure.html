@@ -5,8 +5,9 @@
   {% load staticfiles %}
 
   {% include 'material/includes/material_css.html' %}
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="{% static 'material/js/jquery-2.2.0.js' %}"></script>
   {% include 'material/includes/material_js.html' %}
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <!--Let browser know website is optimized for mobile-->
@@ -55,9 +56,6 @@
       <ul class="right hide-on-med-and-down">
         
         <li>
-
-
-
           <form action="/list_cartridges" method="POST"> {% csrf_token %}
             <div class="input-field">
               <input id="search" type="search" name="code" required>
@@ -88,11 +86,22 @@
       </ul>
       
       <ul class="side-nav" id="mobile-demo">
-        <li><a class="dropdown-button" href="/newclient">Nuevo cliente
-        <i class="material-icons left">view_module</i></a></li>
 
-        <li><a class="dropdown-button" href="/list_clients">Listar cliente
-        <i class="material-icons left">view_module</i></a></li>
+
+        <li><a class="dropdown-button" href="/newclient">Nuevo cliente
+        <i class="material-icons left">queue</i></a></li>
+
+        <li><a class="dropdown-button" href="/list_clients">Gestionar cliente
+        <i class="material-icons left">perm_contact_calendar</i></a></li>
+
+        <li><hr></li>
+
+        <li><a class="dropdown-button" href="/newcartridges">Nuevo cartucho
+        <i class="material-icons left">queue</i></a></li>
+
+        <li><a class="dropdown-button" href="/list_cartridges">Gestionar cartuchos
+        <i class="material-icons left">description</i></a></li>
+
 
       </ul>
     </div>
