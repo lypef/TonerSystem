@@ -60,12 +60,12 @@ WSGI_APPLICATION = 'TonerSystem.wsgi.application'
 DATABASES = {
     'default': 
     {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dfh45gm2dq93ht',
-        'USER': 'gfpjqvkyusydlr',
-        'PASSWORD': '9-3-3oCUyMTaKeAmK5gCNkMedb',
-        'HOST': 'ec2-54-83-25-238.compute-1.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'lypef_db',
+        'USER': 'lypef',
+        'PASSWORD': 'admin',
+        'HOST': 'mysql-lypef.alwaysdata.net',
+        'PORT': '3306',
     }
 }
 
