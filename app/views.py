@@ -69,7 +69,7 @@ def list_clients(request):
     if request.method == "GET":
         Llclients = clients.objects.all().order_by('-id')   
     if request.method == "POST":
-        Llclients = clients.objects.filter(nombre__contains=request.POST.get('search', '')).order_by('nombre')
+        Llclients = clients.objects.filter(nombre__contains=request.POST.get('search', '').upper()).order_by('nombre')
             
     paginator = Paginator(Llclients, 10) # Show 25 contacts per page
 

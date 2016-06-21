@@ -2,11 +2,10 @@
 <head>
 	<title>{% block title %} {%endblock%}</title>
   
-  <!--Import Google Icon Font-->
+      <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.css">
-
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,9 +17,8 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
 
   {% block menu %}
-  <div class="navbar-fixed">
-  
-  <nav class="teal" role="navigation">
+  <nav class="teal">
+      
   <ul id="ListUsuario" class="dropdown-content">
   <li><a href="#!">Perfil</a></li>
   <li><a href="#!">Preferencias</a></li>
@@ -28,35 +26,37 @@
   <li><a href="/logout">salir</a></li>
   </ul>
 
-  <nav class="teal" role="navigation">
+  
   <ul id="ListCodigo" class="dropdown-content">
   <li><a href="/newcartridges">Agregar</a></li>
   <li><a href="/list_cartridges">Gestionar</a></li>
   <li><a href="#modalsearch" class="modal-trigger">Consultar</a></li>
   </ul>
 
-  <nav class="teal" role="navigation">
+  
   <ul id="ListClientes" class="dropdown-content">
   <li><a href="/newclient">Agregar</a></li>
   <li><a href="/list_clients">Gestionar</a></li>
   <li><a href="#ModalSearchClients" class="modal-trigger">Consultar</a></li>
   </ul>
 
-  <nav class="teal" role="navigation">
+  
   <ul id="ListShow" class="dropdown-content">
   <li><a href="/select_tag_cartridges/green">E - verde</a></li>
   <li><a href="/select_tag_cartridges/yellow">E - Amarilla</a></li>
   <li><a href="/select_tag_cartridges/red">E - Roja</a></li>
   </ul>
 
-    <div class="nav-wrapper">
-      <a href="/" class="brand-logo">CLTA<i class="mdi-action-language right"></i></a>
+
+    <div class="nav-fixed">
+      
+      <a href="/" class="brand-logo">CLTA<i class="material-icons right">language</i></a>
       </a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 
       <ul class="right hide-on-med-and-down">
         
-        <li>
+      <li>
           <form action="/list_cartridges" method="POST"> {% csrf_token %}
             <div class="input-field">
               <input id="search" type="search" name="code" required>
@@ -84,30 +84,28 @@
         <li><a class="dropdown-button" href="#!" data-activates="ListUsuario">
         {{user.username.capitalize}}
         <i class="mdi-hardware-keyboard-arrow-down right"></i><i class="material-icons left">person_pin</i></a></li>
+
       </ul>
-      
       <ul class="side-nav" id="mobile-demo">
-
-
-        <li><a class="dropdown-button" href="/newclient">Nuevo cliente
+        <li><a href="/newclient">Nuevo cliente
         <i class="material-icons left">queue</i></a></li>
 
-        <li><a class="dropdown-button" href="/list_clients">Gestionar cliente
+        <li><a href="/list_clients">Gestionar cliente
         <i class="material-icons left">perm_contact_calendar</i></a></li>
 
         <li><hr></li>
 
-        <li><a class="dropdown-button" href="/newcartridges">Nuevo cartucho
+        <li><a href="/newcartridges">Nuevo cartucho
         <i class="material-icons left">queue</i></a></li>
 
-        <li><a class="dropdown-button" href="/list_cartridges">Gestionar cartuchos
-        <i class="material-icons left">description</i></a></li>
-
-
+        <li><a href="/list_cartridges">Gestionar cartuchos
+        <i class="material-icons left">description</i></a></li> 
       </ul>
     </div>
   </nav>
-  </div>
+  <script type="text/javascript">
+    $(".button-collapse").sideNav();
+  </script>
    {%endblock%}
 
 {% if messages %}
