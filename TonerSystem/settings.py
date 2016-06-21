@@ -20,13 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '3*%by69%jtqt*@j-c0_4ogqy)7ovhz!kr(qqx2w+#dy8(ql#n%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','lypef.alwaysdata.net']
 
 
 # Application definition
@@ -73,7 +71,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-es'
+LANGUAGE_CODE = 'en-ES'
 
 TIME_ZONE = 'America/Mexico_City'
 
@@ -84,8 +82,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR+'/public/')
-STATIC_URL = os.path.join(BASE_DIR+'/public/')
-
+STATIC_URL = '/public/'
 
 from django.core.urlresolvers import reverse_lazy
 LOGIN_URL = reverse_lazy('login')
