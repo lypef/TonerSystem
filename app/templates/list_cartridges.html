@@ -3,7 +3,12 @@
 {% block title%} Generar codigo {% endblock %}
 {% block slider %}{% endblock %}
 {% block body %} 
-
+      
+      <script type="text/javascript">
+      $(document).ready(function() {
+      $('select').material_select();
+      });
+    </script>
     
       <table class="responsive-table striped black-text">
         <thead>
@@ -266,7 +271,7 @@
 
 
     <div class="input-field col s12 l6">
-        <select name="clientselect">
+        <select class="browser-default" name="clientselect">
           <option disabled selected>Cliente</option>
           
           {% for client0 in Lclients0 %}

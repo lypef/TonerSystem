@@ -5,7 +5,11 @@
 {% block body %} 
 
 
-     
+		<script type="text/javascript">
+			$(document).ready(function() {
+			$('select').material_select();
+			});
+		</script>
 
   <form method="POST"> {% csrf_token %}
 	
@@ -28,7 +32,7 @@
         </div>
 
 		<div class="input-field col s12 l6">
-		    <select name="cliente">
+		    <select class="browser-default" name="cliente">
 		      <option disabled selected>Cliente</option>
 
 		      {% for client in Lclients %}
