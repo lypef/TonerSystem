@@ -8,19 +8,19 @@
       <table class="responsive-table striped black-text">
         <thead>
           <tr>
-              <th data-field="id">NOMBRE</th>
-              <th data-field="name"><center>EMPRESA</center></th>
-              <th data-field="price"><center>CELULAR</center></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th data-field="name">NOMBRE</th>
+              <th data-field="company"><center>EMPRESA</center></th>
+              <th data-field="movil"><center>CELULAR</center></th>
+              <th data-field="show"></th>
+              <th data-field="edit"></th>
+              <th data-field="delete"></th>
           </tr>
         </thead>
 
         <tbody>
         {% for client in Lclients %}
           <tr>
-            <td>{{client.nombre|slice:'0:45'}}</td>
+            <td><center>{{client.nombre|slice:'0:45'}}</center></td>
             <td><center>{{client.empresa}}</center></td>
             <td><center>{{client.movil}}</center></td>
             
@@ -32,11 +32,11 @@
 
             <!-- Dropdown Structure -->
             <ul id='dropdown1{{client.id}}' class='dropdown-content'>
-              <li><a class="modal-trigger" href="#modalview{{client.id}}">Cliente</a></li>
+              <li><a class="modal-trigger" href="#modalview{{client.id}}">Detalles</a></li>
               <li><a href="/list_cartridges_clients/{{client.id}}">Cartuchos</a></li>
             </ul>
 
-            </td>
+
 
             <div id="modalview{{client.id}}" class="modal">
               
@@ -86,9 +86,12 @@
         </div>
           </form>  
           <!-- fin view -->
-            <td>
+          </td>
+
+          <!-- Edit -->
+          <td>
             
-            <!-- Edit -->
+            
           <form action="/list_clients_edit" method="POST"> {% csrf_token %}
 
             <a class="waves-effect waves-light btn blue modal-trigger" name="{{ client.id }}" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a>
@@ -179,8 +182,8 @@
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
               </div>
             </div>
-          </td>
           </form>
+          </td>
           <!-- fin delete-->
           </tr>
           {% endfor %}
