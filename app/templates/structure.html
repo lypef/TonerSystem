@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>{% block title %} {%endblock%}</title>
@@ -87,6 +88,21 @@
 
       </ul>
       <ul class="side-nav" id="mobile-demo">
+
+        <li>
+          <nav>
+            <div class="nav-wrapper teal">
+            <form action="/list_cartridges" method="POST"> {% csrf_token %}
+              <div class="input-field">
+                <input id="search" type="search" name="code" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>  
+          </nav>
+        </li>
+        
         <li><a href="/newclient">Nuevo cliente
         <i class="material-icons left">queue</i></a></li>
 

@@ -15,7 +15,7 @@
           <tr>
               <th data-field="price">CLIENTE</th>
               <th data-field="id"><center>NUMERO</center></th>
-              <th data-field="name"><CENTER>EMPRESA</CENTER></th>
+              <th data-field="name"><center>EMPRESA</center></th>
               <th data-field="price"><center>ULTIMO SERVICIO</center></th>
               <th></th>
               <th></th>
@@ -26,7 +26,7 @@
         <tbody>
         {% for client in Lclients %}
           <tr>
-            <td>{{client.client.nombre|slice:'0:30'}}</td>
+            <td>{{client.client.nombre|slice:'0:18'}}</td>
             <td><center>
             
             {% if client.cilindro_drum == 0 %}
@@ -40,15 +40,14 @@
 
             </td>
             <td><center>{{client.client.empresa}}</center></td>
-            <td><center>{{client.fecha_ultimo_servcio}}
-            </center></td>
+            <td><center>{{client.fecha_ultimo_servcio}}</center></td>
               
               <!-- form service -->
             <td>
               
             <form action="/recharge_cartridge" method="POST"> {% csrf_token %}
 
-              <a class="waves-effect waves-light btn green modal-trigger" href="#modalservice{{client.id}}"><i class="material-icons">build</i></a>
+              <center><a class="waves-effect waves-light btn green modal-trigger" href="#modalservice{{client.id}}"><i class="material-icons">build</i></a></center>
               
                 <div id="modalservice{{client.id}}" class="modal">
 
@@ -128,7 +127,7 @@
             <!-- form view -->
             <td>
             <form>
-            <a class="waves-effect waves-light btn orange modal-trigger" name="{{ client.id }}" href="#modalview{{client.id}}"><i class="material-icons left">visibility</i>Detalles</a>
+            <center><a class="waves-effect waves-light btn orange modal-trigger" name="{{ client.id }}" href="#modalview{{client.id}}"><i class="material-icons left">visibility</i>Detalles</a></center>
             </td>
 
             <div id="modalview{{client.id}}" class="modal">
@@ -240,7 +239,7 @@
             
           <form action="/list_cartridges_edit" method="POST"> {% csrf_token %}
 
-            <a class="waves-effect waves-light btn blue modal-trigger" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a>
+            <center><a class="waves-effect waves-light btn blue modal-trigger" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a></center>
             
 
             
@@ -314,7 +313,7 @@
             <td>
             <form action="/list_cartridges_delete" method="POST"> {% csrf_token %}
 
-            <a class="waves-effect waves-light btn red modal-trigger" name="id" href="#modaldelete{{client.id}}"><i class="material-icons left">delete</i>Eliminar</a>
+            <center><a class="waves-effect waves-light btn red modal-trigger" name="id" href="#modaldelete{{client.id}}"><i class="material-icons left">delete</i>Eliminar</a></center>
             
 
             <div id="modaldelete{{client.id}}" class="modal">

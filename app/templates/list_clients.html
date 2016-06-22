@@ -5,65 +5,257 @@
 {% block body %} 
 
     
-      <table>
-      <thead>
-         <tr><th>Student</th><th>Class</th><th>Grade</th></tr>
-      </thead>
-      <tbody>
-         <tr><td>Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-         <tr><td>Rahul Sharma</td><td>VI</td><td>B</td></tr>
-         <tr><td>Mohan Sood</td><td>VI</td><td>A</td></tr>
-      </tbody>
+      <table class="responsive-table striped black-text">
+         <thead>
+          <tr>
+              <th data-field="id">CLIENTE</th>
+              <th data-field="name"><center>EMPRESA</center></th>
+              <th data-field="price"><center>MOVIL</center></th>
+              <th></th>
+              <th></th>
+              <th><br></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for client in Lclients %}
+          <tr>
+            <td>{{client.nombre|slice:'0:45'}}</td>
+            <td><center>{{client.empresa}}</center></td>
+            <td><center>{{client.movil}}</center></td>
+            
+            <td>
+              <!-- form view -->
+            <form>
+            <!-- Dropdown Trigger -->
+            <center><a class='dropdown-button btn green' data-activates='dropdown1{{client.id}}'><i class="material-icons left">visibility</i>Visualizar</a></center>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1{{client.id}}' class='dropdown-content'>
+              <li><a class="modal-trigger" href="#modalview{{client.id}}">Detalles</a></li>
+              <li><a href="/list_cartridges_clients/{{client.id}}">Cartuchos</a></li>
+            </ul>
+
+
+
+        <div id="modalview{{client.id}}" class="modal">
+              
+        <div class="modal-content">
+          <h5>{{client.nombre}} - ({{client.id}})</h5>
+        
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label class="black-text" for="icon_prefix">{{ client.nombre }}</label>
+          </div>
+        
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">business</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label class="black-text" for="icon_prefix">{{ client.empresa }}</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">my_location</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label class="black-text" for="icon_prefix">{{ client.direccion }}</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">phone</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label class="black-text" for="icon_prefix">{{ client.telefono }}</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">stay_current_portrait</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label class="black-text" for="icon_prefix">{{ client.movil }}</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">email</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label class="black-text" for="icon_prefix">{{ client.email }}</label>
+        </div>
+        
+        <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+
+          </div>
+        </form>
+          <!-- fin view -->
+          </td>
+          <td>
+            <!-- Edit -->  
+            
+          <form action="/list_clients_edit" method="POST"> {% csrf_token %}
+
+            <center><a class="waves-effect waves-light btn blue modal-trigger" name="{{ client.id }}" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a></center>
+            
+
+            
+
+        <div id="modaledit{{client.id}}" class="modal">
+              
+        <div class="modal-content">
+          <h5>{{client.nombre}}</h5>
+          
+          <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.nombre}}" value="{{client.nombre}}" name="nombre" >
+        </div>
+
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">business</i>
+          <input id="icon_telephone" type="tel" class="validate" placeholder="{{client.empresa}}" value="{{client.empresa}}" name="empresa" >
+        </div>
+      
+
+      <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">my_location</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.direccion}}" value="{{client.direccion}}" name="direccion" >
+      </div>
+
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">phone</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.telefono}}" value="{{client.telefono}}" name="telefono" >
+        </div>
+
+
+        <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">stay_current_portrait</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="{{client.movil}}" value="{{client.movil}}" name="movil" >
+        </div>
+
+
+     <div class="input-field col s12 l6">
+          <i class="material-icons prefix black-text">email</i>
+          <input id="icon_prefix" type="email" class="validate" placeholder="{{client.email}}" value="{{client.email}}" name="email" >
+      </div>
+      
+
+        <div class="modal-footer">
+                <button type="submit" class="modal-close btn waves-effect waves-light" name="id" value="{{client.id}}">GUARDAR <i class="material-icons right">save</i></button>
+
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">CANCEL</a>
+        </div>
+
+        </div>
+          </form>
+            <!-- Find edit -->    
+          </td>
+            <td>
+              <!-- Form delete -->
+            <form action="/list_clients_delete" method="POST"> {% csrf_token %}
+
+            <center><a class="waves-effect waves-light btn red modal-trigger" name="id" href="#modaldelete{{client.id}}"><i class="material-icons left">delete</i>Eliminar</a></center>
+            
+
+            <div id="modaldelete{{client.id}}" class="modal">
+              <div class="modal-content">
+                <h4>ELIMINAR {{client.nombre}}</h4>
+                <p>
+                ESTA SEGURO QUE DESEA ELIMINAR EL CLIENTE?.
+                <br><br>
+                NOMBRE: {{client.nombre}}
+                <br>
+                EMPRESA: {{client.empresa}}
+                <br>
+                DIRECCION: {{client.direccion}}
+                <br>
+                TELEFONO: {{client.telefono}}
+                <br>
+                MOVIL: {{client.movil}}
+                <br>
+                E-MAIL: {{client.email}}
+                </p>
+                </div>
+                <div class="modal-footer">
+
+                <button value="{{ client.id }}" type="submit" class="modal-close btn waves-effect waves-light" name="id">ELIMINAR <i class="material-icons right">delete</i></button>
+
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+              </div>
+            </div>
+          </form>
+            </td>
+          </tr>
+        {% endfor %}
+          
+        </tbody>
       </table>
-      <h3>Stripped Table with borders</h3>
-      <table class="striped bordered black-text">
-      <thead>
-         <tr><th>Student</th><th>Class</th><th>Grade</th></tr>
-      </thead>
-      <tbody>
-         <tr><td>Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-         <tr><td>Rahul Sharma</td><td>VI</td><td>B</td></tr>
-         <tr><td>Mohan Sood</td><td>VI</td><td>A</td></tr>
-      </tbody>
-      </table>
-      <hr/>
-      <h3>Centered Table</h3>
-      <table class="centered black-text">
-      <thead>
-         <tr><th>Student</th><th>Class</th><th>Grade</th></tr>
-      </thead>
-      <tbody>
-         <tr><td>Mahesh Parashar</td><td>VI</td><td>A</td></tr>
-         <tr><td>Rahul Sharma</td><td>VI</td><td>B</td></tr>
-         <tr><td>Mohan Sood</td><td>VI</td><td>A</td></tr>
-      </tbody>
-      </table>
-      <h3>Responsive table</h3>
-      <table class="responsive-table black-text">
-      <thead>
-         <tr>
-         <th>Student</th><th>Class</th><th>Data #1</th>
-         <th>Data #2</th><th>Data #3</th><th>Data #4</th>
-         <th>Data #5</th><th>Data #6</th><th>Data #7</th>
-         <th>Data #8</th><th>Data #9</th><th>Data #10</th>
-         </tr>
-      </thead>
-      <tbody>
-         <tr>
-         <td>Mahesh Parashar</td><td>VI</td><td>10</td>
-         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-         <td>16</td><td>17</td><td>19</td><td>20</td>
-         </tr>
-         <tr>
-         <td>Rahul Sharma</td><td>VI</td><td>10</td>
-         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-         <td>16</td><td>17</td><td>19</td><td>20</td>
-         </tr>
-         <tr><td>Mohan Sood</td><td>VI</td><td>10</td>
-         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
-         <td>16</td><td>17</td><td>19</td><td>20</td>
-         </tr>
-       </tbody>
-       </table>
+    
+<ul class="pagination center">
+    <span class="step-links">
+        {% if Lclients.has_previous %}
+            <a class="material-icons large" href="?page={{ Lclients.previous_page_number }}">chevron_left</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ Lclients.number }} de {{ Lclients.paginator.num_pages }}.
+        </span>
+
+        {% if Lclients.has_next %}
+            <a class="material-icons large" href="?page={{ Lclients.next_page_number }}">chevron_right</a>
+        {% endif %}
+    </span>
+</ul>
+
+<!-- Modal search clients -->
+  <div id="DetallesClients" class="modal">
+    <div class="modal-content">
+      <span class="black-text">
+        
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Namssssqa</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">business</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">my_location</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">phone</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">stay_current_portrait</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+
+        <div class="input-field col s6">
+          <i class="material-icons prefix">email</i>
+          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
+          <label for="icon_prefix">First Name</label>
+        </div>
+
+
+        <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+        </div>
+
+      </span>
+    </div>
+  </div>  
             
 {% endblock %}

@@ -24,7 +24,7 @@ DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','lypef.alwaysdata.net']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
