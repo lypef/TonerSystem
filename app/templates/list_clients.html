@@ -5,32 +5,65 @@
 {% block body %} 
 
     
-      <table class="responsive-table">
-        <thead>
-          <tr>
-              <th data-field="id">Name</th>
-              <th data-field="name">Item Name</th>
-              <th data-field="price">Item Price</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>Alvin</td>
-            <td>Eclair</td>
-            <td>$0.87</td>
-          </tr>
-          <tr>
-            <td>Alan</td>
-            <td>Jellybean</td>
-            <td>$3.76</td>
-          </tr>
-          <tr>
-            <td>Jonathan</td>
-            <td>Lollipop</td>
-            <td>$7.00</td>
-          </tr>
-        </tbody>
+      <table>
+      <thead>
+         <tr><th>Student</th><th>Class</th><th>Grade</th></tr>
+      </thead>
+      <tbody>
+         <tr><td>Mahesh Parashar</td><td>VI</td><td>A</td></tr>
+         <tr><td>Rahul Sharma</td><td>VI</td><td>B</td></tr>
+         <tr><td>Mohan Sood</td><td>VI</td><td>A</td></tr>
+      </tbody>
       </table>
+      <h3>Stripped Table with borders</h3>
+      <table class="striped bordered">
+      <thead>
+         <tr><th>Student</th><th>Class</th><th>Grade</th></tr>
+      </thead>
+      <tbody>
+         <tr><td>Mahesh Parashar</td><td>VI</td><td>A</td></tr>
+         <tr><td>Rahul Sharma</td><td>VI</td><td>B</td></tr>
+         <tr><td>Mohan Sood</td><td>VI</td><td>A</td></tr>
+      </tbody>
+      </table>
+      <hr/>
+      <h3>Centered Table</h3>
+      <table class="centered">
+      <thead>
+         <tr><th>Student</th><th>Class</th><th>Grade</th></tr>
+      </thead>
+      <tbody>
+         <tr><td>Mahesh Parashar</td><td>VI</td><td>A</td></tr>
+         <tr><td>Rahul Sharma</td><td>VI</td><td>B</td></tr>
+         <tr><td>Mohan Sood</td><td>VI</td><td>A</td></tr>
+      </tbody>
+      </table>
+      <h3>Responsive table</h3>
+      <table class="responsive-table">
+      <thead>
+         <tr>
+         <th>Student</th><th>Class</th><th>Data #1</th>
+         <th>Data #2</th><th>Data #3</th><th>Data #4</th>
+         <th>Data #5</th><th>Data #6</th><th>Data #7</th>
+         <th>Data #8</th><th>Data #9</th><th>Data #10</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+         <td>Mahesh Parashar</td><td>VI</td><td>10</td>
+         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+         <td>16</td><td>17</td><td>19</td><td>20</td>
+         </tr>
+         <tr>
+         <td>Rahul Sharma</td><td>VI</td><td>10</td>
+         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+         <td>16</td><td>17</td><td>19</td><td>20</td>
+         </tr>
+         <tr><td>Mohan Sood</td><td>VI</td><td>10</td>
+         <td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+         <td>16</td><td>17</td><td>19</td><td>20</td>
+         </tr>
+       </tbody>
+       </table>
             
 {% endblock %}
