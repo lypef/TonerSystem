@@ -32,7 +32,6 @@ urlpatterns = patterns('',
     url(r'^restore_cartridge$', views.restore_cartridge, name='restore_cartridge'),
     url(r'^list_cartridges_service_edit$', views.list_cartridges_service_edit, name='list_cartridges_service_edit'),
     url(r'^list_cartridges_clients/(?P<clientid>[^/]+)/$', views.list_cartridges_clients , name='list_cartridges_clients '),
-    url(r'^select_tag_cartridges/(?P<select>[^/]+)/$', views.select_tag_cartridges , name='select_tag_cartridges '),
     
     ) 
 

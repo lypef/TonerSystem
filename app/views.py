@@ -340,19 +340,3 @@ def list_cartridges_clients(request, clientid):
     Lcartridges = cartridges.objects.filter(client=clientid)
     return render (request,'list_cartridges_clients.html',
         {'Lcartridges':Lcartridges})
-
-@login_required
-def select_tag_cartridges(request, select):
-    Lclients = clients.objects.all().order_by('nombre')
-
-    if select == 'green':
-        Lcartridges = cartridges.objects.filter(cilindro_drum = 1 )
-        messages.add_message(request, messages.INFO, 'Es verde')
-    elif select == 'yellow':
-        messages.add_message(request, messages.INFO, 'Es amarillo')
-        Lcartridges = cartridges.objects.filter(cilindro_drum = 0 )
-    elif select == 'red':
-        messages.add_message(request, messages.INFO, 'Es rojo')        
-        Lcartridges = cartridges.objects.filter(cilindro_drum = 1 )
-    
-    return render (request,'list_cartridges.html',{'Lclients':Lcartridges, 'Lclients0': Lclients})

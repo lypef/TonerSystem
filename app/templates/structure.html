@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>{% block title %} {%endblock%}</title>
+  <title>{% block title %} {%endblock%}</title>
   
       <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,7 +12,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       
 </head>
-	<body class="teal">
+  <body class="teal">
   <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.js"></script>
@@ -43,9 +43,7 @@
 
   
   <ul id="ListShow" class="dropdown-content">
-  <li><a href="/select_tag_cartridges/green">E - verde</a></li>
-  <li><a href="/select_tag_cartridges/yellow">E - Amarilla</a></li>
-  <li><a href="/select_tag_cartridges/red">E - Roja</a></li>
+  <li><a href="">Cambiar toner</a></li>
   </ul>
 
 
@@ -58,18 +56,21 @@
       <ul class="right hide-on-med-and-down">
         
       <li>
+      <div class="container">
+        <div class="nav-wrapper">
           <form action="/list_cartridges" method="POST"> {% csrf_token %}
             <div class="input-field">
-              <input id="search" type="search" name="code" required>
+              <input type="text" class="validate center-align" name="code" required>
               <label for="search"><i class="material-icons">search</i></label>
               <i class="material-icons">close</i>
-
             </div>
           </form>
+      </div>
+      </div>
         </li>
 
         <li><a class="dropdown-button" href="#!" data-activates="ListShow
-        ">Mostrar
+        ">Acciones
         <i class="material-icons left">dashboard</i></a></li>
 
 
@@ -181,7 +182,7 @@
         </div>
     
 
-	</body>
+  </body>
 
      {% block footer %}
       <style type="text/css"> 
