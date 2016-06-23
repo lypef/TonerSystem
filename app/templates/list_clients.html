@@ -5,30 +5,30 @@
 {% block body %} 
 
     
-      <table class="responsive-table striped black-text">
+      <table class="responsive-table striped black-text centered">
          <thead>
           <tr>
-              <th data-field="id">CLIENTE</th>
-              <th data-field="name"><center>EMPRESA</center></th>
-              <th data-field="price"><center>MOVIL</center></th>
+              <th>CLIENTE</th>
+              <th>EMPRESA</th>
+              <th>MOVIL<th>
               <th></th>
               <th></th>
-              <th><br></th>
+              <th></th>
           </tr>
         </thead>
 
         <tbody>
         {% for client in Lclients %}
           <tr>
-            <td>{{client.nombre|slice:'0:45'}}</td>
-            <td><center>{{client.empresa}}</center></td>
-            <td><center>{{client.movil}}</center></td>
+            <td>{{client.nombre|slice:'0:15'}}</td>
+            <td>{{client.empresa|slice:'0:15'}}</td>
+            <td>{{client.movil}}</td>
             
             <td>
               <!-- form view -->
             <form>
             <!-- Dropdown Trigger -->
-            <center><a class='dropdown-button btn green' data-activates='dropdown1{{client.id}}'><i class="material-icons left">visibility</i>Visualizar</a></center>
+            <a class='dropdown-button btn green' data-activates='dropdown1{{client.id}}'><i class="material-icons left">visibility</i>Visualizar</a>
 
             <!-- Dropdown Structure -->
             <ul id='dropdown1{{client.id}}' class='dropdown-content'>
@@ -95,7 +95,7 @@
             
           <form action="/list_clients_edit" method="POST"> {% csrf_token %}
 
-            <center><a class="waves-effect waves-light btn blue modal-trigger" name="{{ client.id }}" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a></center>
+            <a class="waves-effect waves-light btn blue modal-trigger" name="{{ client.id }}" href="#modaledit{{client.id}}"><i class="material-icons left">edit</i>EDITAR</a>
             
 
             
@@ -153,7 +153,7 @@
               <!-- Form delete -->
             <form action="/list_clients_delete" method="POST"> {% csrf_token %}
 
-            <center><a class="waves-effect waves-light btn red modal-trigger" name="id" href="#modaldelete{{client.id}}"><i class="material-icons left">delete</i>Eliminar</a></center>
+            <a class="waves-effect waves-light btn red modal-trigger" name="id" href="#modaldelete{{client.id}}"><i class="material-icons left">delete</i>Eliminar</a>
             
 
             <div id="modaldelete{{client.id}}" class="modal">

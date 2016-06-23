@@ -4,14 +4,14 @@
 {% block slider %}{% endblock %}
 {% block body %} 
 
-     <table class="responsive-table striped black-text">
+     <table class="responsive-table striped black-text centered">
         <thead>
           <tr>
               <th data-field="price">CLIENTE</th>
-              <th data-field="id"><center>NUMERO</center></th>
-              <th data-field="name"><center>ULTIMO SERVICIO</center></th>
-              <th data-field="price"><center>M-CARTUCHO</center></th>
-              <th data-field="price"><center>M-IMPRESORA</center></th>
+              <th data-field="id">NUMERO</center></th>
+              <th data-field="name">ULTIMO SERVICIO</th>
+              <th data-field="price">M-CARTUCHO</th>
+              <th data-field="price">M-IMPRESORA</th>
               <th></th>
           </tr>
         </thead>
@@ -19,7 +19,7 @@
         <tbody>
           {% for cartridge in Lcartridges %}    
             <tr>
-              <td>{{cartridge.client.nombre|slice:'0:45'}}</td>
+              <td>{{cartridge.client.nombre|slice:'0:15'}}</td>
               <td><center>{{cartridge.id}}</center></td>
               <td><center>{{cartridge.fecha_ultimo_servcio}}</center></td>
               <td><center>{{cartridge.modelo}}</center></td>

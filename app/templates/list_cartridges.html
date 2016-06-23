@@ -10,13 +10,12 @@
       });
     </script>
     
-      <table class="responsive-table striped black-text">
+      <table class="responsive-table striped black-text centered">
         <thead>
           <tr>
-              <th data-field="price">CLIENTE</th>
-              <th data-field="id"><center>NUMERO</center></th>
-              <th data-field="name"><center>EMPRESA</center></th>
-              <th data-field="price"><center>ULTIMO SERVICIO</center></th>
+              <th>EMPRESA</th>
+              <th>ULTIMO SERVICIO</th>
+              <th></th>
               <th></th>
               <th></th>
               <th></th>
@@ -26,22 +25,20 @@
         <tbody>
         {% for client in Lclients %}
           <tr>
-            <td>{{client.client.nombre|slice:'0:18'}}</td>
-            <td><center>
-            
-            {% if client.cilindro_drum == 0 %}
-              <div class="card-panel yellow">{{client.id}}<br><i class="material-icons">shuffle</i></div>
-            {% elif client.cilindro_drum < client.numero_recarga_maxima %}
-              <div class="card-panel green">{{client.id}}<br><i class="material-icons">done</i></div>
-            {%else%}
-              <div class="card-panel red">{{client.id}}<br><i class="material-icons">close</i></div>
-            {%endif%}  
-            </center>
-
-            </td>
             <td><center>{{client.client.empresa}}</center></td>
             <td><center>{{client.fecha_ultimo_servcio}}</center></td>
-              
+            <td>
+            
+            {% if client.cilindro_drum == 0 %}
+              <div class="card-panel yellow">Numero<br>{{client.id}}<br><i class="material-icons">shuffle</i></div>
+            {% elif client.cilindro_drum < client.numero_recarga_maxima %}
+              <div class="card-panel green">Numero<br>{{client.id}}<br><i class="material-icons">done</i></div>
+            {%else%}
+              <div class="card-panel red">Numero<br>{{client.id}}<br><i class="material-icons">close</i></div>
+            {%endif%}  
+            
+
+            </td>  
               <!-- form service -->
             <td>
               
