@@ -93,13 +93,18 @@
         <li>
           <nav>
             <div class="nav-wrapper teal">
-            <form action="/list_cartridges" method="POST"> {% csrf_token %}
-              <div class="input-field">
-                <input id="search" type="search" name="code" required>
+            <form action="/list_clients"  class="col s12" method="POST"> {% csrf_token %}
+    
+        
+        <div class="input-field col s12">
+        <input id="search" type="search" name="search" required>
                 <label for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
-              </div>
-            </form>
+
+
+        </div>
+        </center>
+    
+    </form>  
           </div>  
           </nav>
         </li>
@@ -112,11 +117,31 @@
 
         <li><hr></li>
 
+        <li>
+          <nav>
+            <div class="nav-wrapper teal">
+            <form action="/list_cartridges" method="POST"> {% csrf_token %}
+              <div class="input-field">
+                <input id="search" type="search" name="code" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </form>
+          </div>  
+          </nav>  
+        </li>
+
         <li><a href="/newcartridges">Nuevo cartucho
         <i class="material-icons left">queue</i></a></li>
 
         <li><a href="/list_cartridges">Gestionar cartuchos
         <i class="material-icons left">description</i></a></li> 
+
+        <li><hr></li>
+
+        <li><a href="/list_cartridges">Cambiar cartucho
+        <i class="material-icons left">swap_horiz</i></a></li> 
+
       </ul>
     </div>
   </nav>
