@@ -340,3 +340,10 @@ def list_cartridges_clients(request, clientid):
     Lcartridges = cartridges.objects.filter(client=clientid)
     return render (request,'list_cartridges_clients.html',
         {'Lcartridges':Lcartridges})
+
+@login_required
+def change_cartridge(request):
+    messages.add_message(request, messages.INFO, 'Cartucho [ '+ request.POST.get('cvacio','') +' ] cambiado exitosamente.')
+    return redirect ('/list_cartridges/'+ request.POST.get('cvacio','') +'/')
+
+

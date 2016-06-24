@@ -43,7 +43,7 @@
 
   
   <ul id="ListShow" class="dropdown-content">
-  <li><a href="">Cambiar toner</a></li>
+  <li><a href="#Modalchange" class="modal-trigger">Cambiar toner</a></li>
   </ul>
 
 
@@ -139,7 +139,7 @@
 
         <li><hr></li>
 
-        <li><a href="/list_cartridges">Cambiar cartucho
+        <li><a href="#Modalchange" class="modal-trigger">Cambiar toner
         <i class="material-icons left">swap_horiz</i></a></li> 
 
       </ul>
@@ -302,6 +302,36 @@
 
         <center>
           <button type="submit" class="modal-action modal-close btn waves-effect waves-light col s12">Ingresar</button>
+        </center>
+    
+    </form>  
+
+      </span>
+    </div>
+  </div>
+
+  <!-- Modal change cartradge -->
+  <div id="Modalchange" class="modal">
+    <div class="modal-content">
+      <span class="black-text">
+        
+    <form action="/change_cartridge"  class="col s12" method="POST"> {% csrf_token %}
+    
+        
+        <div class="input-field col s12">
+          <i class="material-icons prefix">label_outline </i>
+          <input id="icon_prefix" type="number" class="validate center-align" autofocus="True" name="cvacio" required>
+          <label for="icon_prefix" class="center-align">Ingrese el numero del cartucho vacio</label>
+        </div>
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix">label </i>
+          <input id="icon_prefix" type="number" class="validate center-align" name="clleno" required>
+          <label for="icon_prefix" class="center-align">Ingrese el numero del cartucho lleno o remanufacturado</label>
+        </div>
+
+        <center>
+          <button type="submit" class="modal-action btn waves-effect waves-light col s12">Ingresar</button>
         </center>
     
     </form>  
