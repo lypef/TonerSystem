@@ -343,7 +343,25 @@ def list_cartridges_clients(request, clientid):
 
 @login_required
 def change_cartridge(request):
-    messages.add_message(request, messages.INFO, 'Cartucho [ '+ request.POST.get('cvacio','') +' ] cambiado exitosamente.')
-    return redirect ('/list_cartridges/'+ request.POST.get('cvacio','') +'/')
+    try:
+        cvaciotmp = cartridges.objects.get(id=request.POST.get('cvacio', ''))
+        cllenotmp = cartridges.objects.get(id=request.POST.get('clleno', ''))
+        
+        cvacio = cartridges.objects.get(id=cvaciotmp.id)
+        cvacio.client = clients.objects.get(id=cllenotmp.client.id)
+        cvacio.observaciones += '\n\nSE REALIZA CAMBIO POR CARTUCHO NUMERO [ '+str(cllenotmp.id)+' ] DE ( '+str(cllenotmp.client.nombre)+' ) - ' + str(datetime.datetime.now())
+
+        clleno = cartridges.objects.get(id=cllenotmp.id)
+        clleno.client = clients.objects.get(id=cvaciotmp.client.id)    
+        clleno.observaciones += '\n\nSE REALIZA CAMBIO POR CARTUCHO NUMERO [ '+str(cvaciotmp.id)+' ] DE ( '+str(cvaciotmp.client.nombre)+' ) - ' + str(datetime.datetime.now())
+
+        cvacio.save()
+        clleno.save()
+
+        messages.add_message(request, messages.INFO, 'Cartucho [ '+ request.POST.get('cvacio','') +' ] cambiado exitosamente.')
+        return redirect ('/list_cartridges/'+ request.POST.get('cvacio','') +'/')
+    except Exception, e:
+        messages.add_message(request, messages.INFO, e)
+        return redirect ('/list_cartridges')
 
 
