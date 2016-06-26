@@ -379,25 +379,25 @@ def change_cartridge(request):
         clleno.client = clients.objects.get(id=cvaciotmp.client.id)    
         clleno.observaciones += '\n\nSE REALIZA CAMBIO POR CARTUCHO NUMERO [ '+str(cvaciotmp.id)+' ] DE ( '+str(cvaciotmp.client.nombre)+' ) - ' + str(datetime.datetime.now())
 
-<<<<<<< HEAD
+
         cvacio.save()
         clleno.save()
 
-=======
+
         vartmp = 'se realiza cambio de cartucho optimo. numero: ('+str(cvaciotmp.id)+'), cliente ['+str(cvaciotmp.client.nombre)+'] por cartucho vacio. numero: ('+str(cllenotmp.id)+'), cliente ['+str(cllenotmp.client.nombre)+']'
         cvacio.save()
         clleno.save()
         add_log(vartmp)
->>>>>>> develop
+
         messages.add_message(request, messages.INFO, 'Cartucho [ '+ request.POST.get('cvacio','') +' ] cambiado exitosamente.')
         return redirect ('/list_cartridges/'+ request.POST.get('cvacio','') +'/')
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
         return redirect ('/list_cartridges')
 
-<<<<<<< HEAD
 
-=======
+
+
 def add_log(registrotxt):
     insert = logs(
         registro = registrotxt.upper(),
@@ -405,4 +405,4 @@ def add_log(registrotxt):
         )
     insert.save()
     
->>>>>>> develop
+
