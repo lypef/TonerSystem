@@ -172,13 +172,43 @@
     </li>
     <li>
       <div class="collapsible-header active"><i class="material-icons">speaker_notes</i>Que es esto?</div>
-      <div class="collapsible-body"><p><span class="flow-text">
-        {% for log in Llogs %}
-        {{log.registro}} , {{log.client.nombre}}, {{log.cartridge.id}}, {{log.fecha}} <br>
+      <div class="collapsible-body">
+      {% for log in Llogs %}
+          
+      <div class="col s12 m4">
+        <div class="card-panel teal">
+          <span class="black-text">
+            <strong># {{log.id}} - </strong>{{log.registro}}
+          </span>
+          <div class="footer-copyright right-align white-text">
+            {{log.fecha}}
+          </div>
+        </div>
+      </div>
+    
         {%endfor%}
-      </span></p></div>
-    </li>
+        <br>
+        <ul class="pagination center">
+    <span class="step-links">
+        {% if Llogs.has_previous %}
+            <a class="material-icons large" href="?page={{ Llogs.previous_page_number }}">chevron_left</a>
+        {% endif %}
+
+        <span class="current">
+            Pagina {{ Llogs.number }} de {{ Llogs.paginator.num_pages }}.
+        </span>
+
+        {% if Llogs.has_next %}
+            <a class="material-icons large" href="?page={{ Llogs.next_page_number }}">chevron_right</a>
+        {% endif %}
+    </span>
   </ul>
+  <br>
+  </li>
+      </div>
+      </div>
+    
+
 
 
 
@@ -189,7 +219,7 @@
 
          
           
-  </div>
+
         
 
 {% endblock %}

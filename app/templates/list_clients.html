@@ -8,6 +8,7 @@
       <table class="responsive-table striped black-text centered">
          <thead>
           <tr>
+              <th>ID</th>
               <th>CLIENTE</th>
               <th>EMPRESA</th>
               <th>MOVIL</th>
@@ -20,6 +21,7 @@
         <tbody>
         {% for client in Lclients %}
           <tr>
+            <td>{{client.id}}</td>
             <td>{{client.nombre|slice:'0:15'}}</td>
             <td><center>{{client.empresa}}</center></td>
             <td><center>{{client.movil}}</center></td>
