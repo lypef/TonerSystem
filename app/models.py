@@ -25,3 +25,10 @@ class cartridges (models.Model):
 	modelo = models.CharField(max_length=60) 
 	modelo_imp = models.CharField(max_length=60) 
 	client = models.ForeignKey(clients)
+
+class Logs(models.Model):
+	registro = models.TextField()
+	fecha = models.DateField(null=True)
+
+
+	

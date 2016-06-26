@@ -7,7 +7,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import datetime
-from models import clients, cartridges
+from models import clients, cartridges, Logs
 
 # Create your views here.
 def login(request): 
@@ -18,7 +18,8 @@ def login(request):
 
 @login_required
 def manage(request):
-    return render(request,'manage.html')
+    Llogs = Logs.objects.all()
+    return render(request,'manage.html',{'Llogs':Llogs})
 
 @login_required
 def newclient(request):
@@ -96,7 +97,7 @@ def list_clients_edit(request):
         update.movil = request.POST.get('movil', '').upper()
         update.email = request.POST.get('email', '').upper()
         update.save()
-        
+        add_log('se edito el cliente', 1, update.id)
         messages.add_message(request, messages.INFO, 'Cliente editado con exito')
         return redirect ('/list_clients') 
     except Exception, e:
@@ -108,7 +109,7 @@ def list_clients_delete(request):
     try:
         delete = clients.objects.get(id= request.POST.get('id',''))
         delete.delete()
-
+        add_log('se elimino el cliente '+delete.nombre+'', 1, 1)
         messages.add_message(request, messages.INFO, 'Cliente eliminado con exito')
         return redirect ('/list_clients')        
 
@@ -347,3 +348,12 @@ def change_cartridge(request):
     return redirect ('/list_cartridges/'+ request.POST.get('cvacio','') +'/')
 
 
+def add_log(registrotxt, idcartridge, idclient):
+    insert = Logs(
+        registro = registrotxt.upper(),
+        cartridge = cartridges.objects.get(id=idcartridge),
+        client = clients.objects.get(id=idclient),
+        fecha = datetime.datetime.now(),
+        )
+    insert.save()
+    
