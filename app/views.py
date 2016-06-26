@@ -7,7 +7,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import datetime
-from models import clients, cartridges
+from models import clients, cartridges, logs
 
 # Create your views here.
 def login(request): 
@@ -18,7 +18,22 @@ def login(request):
 
 @login_required
 def manage(request):
-    return render(request,'manage.html')
+    Llogs = logs.objects.all().order_by('-id')
+
+    paginator = Paginator(Llogs, 10) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    
+    try:
+        Llogs = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        Llogs = paginator.page(1)
+    except EmptyPage:
+        # If page is out osf range (e.g. 9999), deliver last page of results.
+        Llogs = paginator.page(paginator.num_pages)
+
+    return render(request,'manage.html',{'Llogs':Llogs})
 
 @login_required
 def newclient(request):
@@ -50,6 +65,7 @@ def newclient(request):
     			email = request.POST.get('email', '')
     			)
     		insert.save()
+                add_log('se creo cliente [' + str(insert.nombre) + '] con id ('+str(insert.id)+')')
     		messages.add_message(request, messages.INFO, 'Cliente agregado con exito')
     		return redirect('/list_clients')
 
@@ -96,7 +112,7 @@ def list_clients_edit(request):
         update.movil = request.POST.get('movil', '').upper()
         update.email = request.POST.get('email', '').upper()
         update.save()
-        
+        add_log('se edito el cliente ['+str(update.nombre)+'] con id ('+str(update.id)+')')
         messages.add_message(request, messages.INFO, 'Cliente editado con exito')
         return redirect ('/list_clients') 
     except Exception, e:
@@ -107,8 +123,8 @@ def list_clients_edit(request):
 def list_clients_delete(request):
     try:
         delete = clients.objects.get(id= request.POST.get('id',''))
+        add_log('se elimino el cliente ['+str(delete.nombre)+'] con id('+str(delete.id)+')')
         delete.delete()
-
         messages.add_message(request, messages.INFO, 'Cliente eliminado con exito')
         return redirect ('/list_clients')        
 
@@ -153,6 +169,7 @@ def newcartridges(request):
                     cuchilla_dosificadora = 0
                 )
                 insert.save()
+                add_log('se agrego cartucho con id ('+str(insert.id)+') y cliente ['+str(insert.client.nombre)+']')
                 messages.add_message(request, messages.INFO, 'Cartucho agregado con exito')
                 return redirect('/list_cartridges')
             except Exception, e:
@@ -214,6 +231,8 @@ def list_cartridges_id(request,id):
 def list_cartridges_edit(request):
     try:
         update = cartridges.objects.get(id=request.POST.get('id', ''))
+        vartmp = 'se actualizo cartucho numero ['+str(update.id)+']: [numero r. maxima ('+str(update.numero_recarga_maxima)+'), cliente ('+str(update
+                .client.nombre)+')]'
         update.modelo_imp = request.POST.get('modelo_impresora', '').upper()
         update.modelo = request.POST.get('modelo_toner', '').upper()
         update.numero_recarga_maxima = request.POST.get('numero_recarga', '').upper()
@@ -221,7 +240,9 @@ def list_cartridges_edit(request):
         update.descripcion = request.POST.get('descripcion', '').upper()
         update.observaciones = request.POST.get('observaciones', '').upper()
         update.save()
-        
+        vartmp += ' por: [numero r. maxima ('+str(update.numero_recarga_maxima)+'), cliente ('+str(update
+                .client.nombre)+')]'
+        add_log(vartmp)
         messages.add_message(request, messages.INFO, 'Cartucho [' + request.POST.get('id', '') + '] editado con exito')
         return redirect (request.POST.get('url', '')) 
     except Exception, e:
@@ -233,8 +254,9 @@ def list_cartridges_edit(request):
 def list_cartridges_delete(request):
     try:
         delete = cartridges.objects.get(id= request.POST.get('id',''))
+        vartmp = 'se elimina el cartucho numero: ('+str(delete.id)+'), cliente ['+str(delete.client.nombre)+']'
         delete.delete()
-
+        add_log(vartmp)
         messages.add_message(request, messages.INFO, 'Cartucho eliminado con exito')
         return redirect ('/list_cartridges')        
 
@@ -284,6 +306,7 @@ def recharge_cartridge(request):
             update.fecha_ultimo_servcio = datetime.datetime.now()
             update.observaciones += "\n\n - SE REALIZO RECARGA DE TONER CON EXITO. " + str(datetime.datetime.now()) 
             update.save()
+            add_log('se realiza recarga normal a cartucho numero: ('+str(update.id)+'), cliente ['+str(update.client.nombre)+']')
             messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] recargado con exito')
             return redirect ('/list_cartridges')
         else:
@@ -307,7 +330,7 @@ def restore_cartridge(request):
         update.observaciones = " - SE REALIZO REMANUFACTURA Y RECARGA CON EXITO." + str(datetime.datetime.now()) 
         update.fecha_ultimo_servcio = datetime.datetime.now()
         update.save()
-        
+        add_log('se realiza remanufactura total a cartucho numero: ('+str(update.id)+'), cliente ['+str(update.client.nombre)+']')
         messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] remanufacturado con exito')
         return redirect (request.POST.get('url',''))
         
@@ -319,15 +342,16 @@ def restore_cartridge(request):
 def list_cartridges_service_edit(request):
     try:
         update = cartridges.objects.get(id=request.POST.get('id', ''))
+        vartmp = 'se realiza actualizacion de cartucho numero: ('+str(update.id)+'), [c- drum ('+str(update.cilindro_drum)+'), rodillo magnetico ('+str(update.rodillo_magnetico)+'), rodillo de carga ('+str(update.rodillo_carga)+'), c-limpiadora ('+str(update.cuchilla_impiadora)+'), c-dosificadora ('+str(update.cuchilla_dosificadora)+')]'
         update.cilindro_drum = request.POST.get('drum','')
         update.rodillo_magnetico = request.POST.get('rmagnetico','')
         update.rodillo_carga = request.POST.get('rcarga','')
         update.cuchilla_impiadora = request.POST.get('cclean','')
         update.cuchilla_dosificadora  = request.POST.get('cdosificadora','')
         update.observaciones = request.POST.get('observaciones','').upper() + ' ' +str(datetime.datetime.now()) 
-
         update.save()
-        
+        vartmp += ' por, [c- drum ('+str(update.cilindro_drum)+'), rodillo magnetico ('+str(update.rodillo_magnetico)+'), rodillo de carga ('+str(update.rodillo_carga)+'), c-limpiadora ('+str(update.cuchilla_impiadora)+'), c-dosificadora ('+str(update.cuchilla_dosificadora)+')]'
+        add_log(vartmp)
         messages.add_message(request, messages.INFO, 'Cartucho [' + request.POST.get('id', '') + '] editado con exito')
         return redirect (request.POST.get('url', '')) 
     except Exception, e:
@@ -355,13 +379,30 @@ def change_cartridge(request):
         clleno.client = clients.objects.get(id=cvaciotmp.client.id)    
         clleno.observaciones += '\n\nSE REALIZA CAMBIO POR CARTUCHO NUMERO [ '+str(cvaciotmp.id)+' ] DE ( '+str(cvaciotmp.client.nombre)+' ) - ' + str(datetime.datetime.now())
 
+<<<<<<< HEAD
         cvacio.save()
         clleno.save()
 
+=======
+        vartmp = 'se realiza cambio de cartucho optimo. numero: ('+str(cvaciotmp.id)+'), cliente ['+str(cvaciotmp.client.nombre)+'] por cartucho vacio. numero: ('+str(cllenotmp.id)+'), cliente ['+str(cllenotmp.client.nombre)+']'
+        cvacio.save()
+        clleno.save()
+        add_log(vartmp)
+>>>>>>> develop
         messages.add_message(request, messages.INFO, 'Cartucho [ '+ request.POST.get('cvacio','') +' ] cambiado exitosamente.')
         return redirect ('/list_cartridges/'+ request.POST.get('cvacio','') +'/')
     except Exception, e:
         messages.add_message(request, messages.INFO, e)
         return redirect ('/list_cartridges')
 
+<<<<<<< HEAD
 
+=======
+def add_log(registrotxt):
+    insert = logs(
+        registro = registrotxt.upper(),
+        fecha = datetime.datetime.now(),
+        )
+    insert.save()
+    
+>>>>>>> develop
