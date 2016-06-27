@@ -145,5 +145,31 @@
         {% endfor %}
         </tbody>
       </table>
-          
+<ul class="pagination center">
+    {%if Lcartridges.number > 1%}
+      <li class="waves-effect"><a href="?page={{ Lcartridges.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+    {%else%}
+      <li class="disabled"><i class="material-icons">chevron_left</i></li>
+    {%endif%}
+    
+      {% for log in page_range %}
+      
+      {%if log == Lcartridges.number%}
+        <li class="active"><a href="?page={{log}}">{{log}}</a></li>
+      {%else%}  
+        <li class="waves-effect"><a href="?page={{log}}">{{log}}</a></li>
+      {%endif%}
+      
+      
+      
+    {%endfor%}  
+
+    {%if Lcartridges.number < count %}
+      <li class="waves-effect"><a href="?page={{ Lcartridges.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+    {%else%}
+      <li class="disabled"><i class="material-icons">chevron_right</i></li>
+    {%endif%}
+
+    
+  </ul>          
 {% endblock %}
