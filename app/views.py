@@ -20,7 +20,7 @@ def login(request):
 def manage(request):
     Llogs = logs.objects.all().order_by('-id')
 
-    paginator = Paginator(Llogs, 10) # Show 25 contacts per page
+    paginator = Paginator(Llogs, 9) # Show 25 contacts per page
 
     page = request.GET.get('page')
     
@@ -32,8 +32,8 @@ def manage(request):
     except EmptyPage:
         # If page is out osf range (e.g. 9999), deliver last page of results.
         Llogs = paginator.page(paginator.num_pages)
-
-    return render(request,'manage.html',{'Llogs':Llogs})
+    
+    return render(request,'manage.html',{'Llogs':Llogs,'page_range':paginator.page_range,'count':paginator.num_pages})
 
 @login_required
 def newclient(request):
@@ -65,7 +65,7 @@ def newclient(request):
     			email = request.POST.get('email', '')
     			)
     		insert.save()
-                add_log('se creo cliente [' + str(insert.nombre) + '] con id ('+str(insert.id)+')')
+                add_log('se creo cliente [' + str(insert.nombre) + '] con id ('+str(insert.id)+'), empresa ('+str(insert.empresa)+'), direccion ('+str(insert.direccion)+'), telefono ('+str(insert.telefono)+'), movil ('+str(insert.movil)+'), email ('+str(insert.email)+').')
     		messages.add_message(request, messages.INFO, 'Cliente agregado con exito')
     		return redirect('/list_clients')
 
@@ -99,7 +99,7 @@ def list_clients(request):
         # If page is out osf range (e.g. 9999), deliver last page of results.
         Lclients = paginator.page(paginator.num_pages)
 
-    return render (request,'list_clients.html',{'Lclients':Lclients})
+    return render (request,'list_clients.html',{'Lclients':Lclients,'page_range':paginator.page_range,'count':paginator.num_pages})
 
 @login_required
 def list_clients_edit(request):
@@ -111,8 +111,10 @@ def list_clients_edit(request):
         update.telefono = request.POST.get('telefono', '').upper()
         update.movil = request.POST.get('movil', '').upper()
         update.email = request.POST.get('email', '').upper()
+        vartmp = 'se edito el cliente con id ('+str(update.id)+'). nombre ['+str(update.nombre)+'] , empresa ('+str(update.empresa)+'), direccion ('+str(update.direccion)+'), telefono ('+str(update.telefono)+'), movil ('+str(update.movil)+'), email ('+str(update.email)+')'
         update.save()
-        add_log('se edito el cliente ['+str(update.nombre)+'] con id ('+str(update.id)+')')
+        vartmp += ' por nombre ['+str(update.nombre)+'] , empresa ('+str(update.empresa)+'), direccion ('+str(update.direccion)+'), telefono ('+str(update.telefono)+'), movil ('+str(update.movil)+'), email ('+str(update.email)+')'
+        add_log(vartmp)
         messages.add_message(request, messages.INFO, 'Cliente editado con exito')
         return redirect ('/list_clients') 
     except Exception, e:
@@ -205,7 +207,7 @@ def list_cartridges(request):
     if request.method == "POST":
         Lcartridges = cartridges.objects.filter(id__contains=request.POST.get('code', '')).order_by('id')
             
-    paginator = Paginator(Lcartridges, 10) # Show 25 contacts per page
+    paginator = Paginator(Lcartridges, 5) # Show 25 contacts per page
 
     page = request.GET.get('page')
     try:
@@ -217,7 +219,7 @@ def list_cartridges(request):
         # If page is out osf range (e.g. 9999), deliver last page of results.
         Lcartridges = paginator.page(paginator.num_pages)
 
-    return render (request,'list_cartridges.html',{'Lclients':Lcartridges, 'Lclients0': Lclients})
+    return render (request,'list_cartridges.html',{'Lclients':Lcartridges, 'Lclients0': Lclients,'page_range':paginator.page_range,'count':paginator.num_pages})
 
 @login_required
 def list_cartridges_id(request,id):
@@ -362,8 +364,22 @@ def list_cartridges_service_edit(request):
 @login_required
 def list_cartridges_clients(request, clientid):
     Lcartridges = cartridges.objects.filter(client=clientid)
+
+    paginator = Paginator(Lcartridges, 5) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    try:
+        Lcartridges = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        Lcartridges = paginator.page(1)
+    except EmptyPage:
+        # If page is out osf range (e.g. 9999), deliver last page of results.
+        Lcartridges = paginator.page(paginator.num_pages)
+
+
     return render (request,'list_cartridges_clients.html',
-        {'Lcartridges':Lcartridges})
+        {'Lcartridges':Lcartridges,'page_range':paginator.page_range,'count':paginator.num_pages})
 
 @login_required
 def change_cartridge(request):

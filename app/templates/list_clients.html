@@ -193,71 +193,34 @@
       </table>
     
 <ul class="pagination center">
-    <span class="step-links">
-        {% if Lclients.has_previous %}
-            <a class="material-icons large" href="?page={{ Lclients.previous_page_number }}">chevron_left</a>
-        {% endif %}
+    {%if Lclients.number > 1%}
+      <li class="waves-effect"><a href="?page={{ Lclients.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+    {%else%}
+      <li class="disabled"><i class="material-icons">chevron_left</i></li>
+    {%endif%}
+    
+    
+      {% for log in page_range %}
+      
+      {%if log == Lclients.number%}
+        <li class="active"><a href="?page={{log}}">{{log}}</a></li>
+      {%else%}  
+        <li class="waves-effect"><a href="?page={{log}}">{{log}}</a></li>
+      {%endif%}
+      
+      
+      
+    {%endfor%}  
 
-        <span class="current">
-            Pagina {{ Lclients.number }} de {{ Lclients.paginator.num_pages }}.
-        </span>
+    {%if Lclients.number < count %}
+      <li class="waves-effect"><a href="?page={{ Lclients.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+    {%else%}
+      <li class="disabled"><i class="material-icons">chevron_right</i></li>
+    {%endif%}
 
-        {% if Lclients.has_next %}
-            <a class="material-icons large" href="?page={{ Lclients.next_page_number }}">chevron_right</a>
-        {% endif %}
-    </span>
-</ul>
-
-<!-- Modal search clients -->
-  <div id="DetallesClients" class="modal">
-    <div class="modal-content">
-      <span class="black-text">
-        
-        <div class="input-field col s6">
-          <i class="material-icons prefix">account_circle</i>
-          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
-          <label for="icon_prefix">First Namssssqa</label>
-        </div>
-
-        <div class="input-field col s6">
-          <i class="material-icons prefix">business</i>
-          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
-          <label for="icon_prefix">First Name</label>
-        </div>
-
-        <div class="input-field col s6">
-          <i class="material-icons prefix">my_location</i>
-          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
-          <label for="icon_prefix">First Name</label>
-        </div>
-
-        <div class="input-field col s6">
-          <i class="material-icons prefix">phone</i>
-          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
-          <label for="icon_prefix">First Name</label>
-        </div>
+    
+  </ul>
 
 
-        <div class="input-field col s6">
-          <i class="material-icons prefix">stay_current_portrait</i>
-          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
-          <label for="icon_prefix">First Name</label>
-        </div>
-
-
-        <div class="input-field col s6">
-          <i class="material-icons prefix">email</i>
-          <input id="icon_prefix" type="text" class="validate" disabled="disabled">
-          <label for="icon_prefix">First Name</label>
-        </div>
-
-
-        <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
-        </div>
-
-      </span>
-    </div>
-  </div>  
             
 {% endblock %}
