@@ -20,7 +20,8 @@ def login(request):
 def manage(request):
     Llogs = logs.objects.all().order_by('-id')
     Lclients = clients.objects.all().order_by('-id')[:3]  
-    
+    Lcartridges = cartridges.objects.all().order_by('-id')[:3]
+
     paginator = Paginator(Llogs, 9) # Show 25 contacts per page
 
     page = request.GET.get('page')
@@ -34,7 +35,7 @@ def manage(request):
         # If page is out osf range (e.g. 9999), deliver last page of results.
         Llogs = paginator.page(paginator.num_pages)
     
-    return render(request,'manage.html',{'Llogs':Llogs,'page_range':paginator.page_range,'count':paginator.num_pages, 'clients':Lclients})
+    return render(request,'manage.html',{'Llogs':Llogs,'page_range':paginator.page_range,'count':paginator.num_pages, 'clients':Lclients, 'Lcartridges':Lcartridges})
 
 @login_required
 def newclient(request):
@@ -192,7 +193,7 @@ def newcartridges(request):
                 )
                 insert.save()
                 add_log('se agrego cartucho con id ('+str(insert.id)+') y cliente ['+str(insert.client.nombre)+']')
-                messages.add_message(request, messages.INFO, 'Cartucho agregado con exito')
+                messages.add_message(request, messages.INFO, 'Cartucho ['+str(insert.id)+'] agregado con exito')
                 return redirect('/list_cartridges')
             except Exception, e:
                 messages.add_message(request, messages.INFO, e)

@@ -3,6 +3,13 @@
 {% block title%} Manage {% endblock %}
 
 {% block body %}
+    
+    <script type="text/javascript">
+      $(document).ready(function() {
+      $('select').material_select();
+      });
+    </script>
+
    <div class="row">
 
   <ul class="collapsible" data-collapsible="expandable">
@@ -12,7 +19,94 @@
         
       <!-- Inicia code numero de cartucho-->
       <div class="row">
-        sss
+        <div class="col s12 m4">
+          <div class="card cyan darken-3">
+            <div class="card-content white-text">
+              <span class="card-title">Cartuchos</span>
+              <form action="/newcartridges" method="POST"> {% csrf_token %}
+  
+  <div class="row">
+    
+    <div class="input-field col s12">
+          <i class="material-icons prefix black-text">print</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="Modelo de impresora" name="modelo_impresora" value="{{ modelo_impresora }}" required></input>
+        </div>
+
+    <div class="input-field col s12">
+          <i class="material-icons prefix black-text">code</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="Modelo de toner" name="modelo_toner" value="{{ modelo_toner }}" required></input>
+        </div>
+
+    
+    <div class="input-field col s12">
+          <i class="material-icons prefix black-text">cached</i>
+          <input id="icon_prefix" type="number" class="validate" placeholder="Numero de recargas maxima" name="numero_recarga" value="{{numero_recarga}}" required></input>
+        </div>
+
+    <div class="input-field col s12 black-text">
+        <select class="browser-default" name="cliente">
+          <option disabled selected>Cliente</option>
+
+          {% for client in clients %}
+
+            
+              <option value="{{client.id}}" {% if client.id == idclient  %} selected {% endif %}>{{client.nombre}} ({{client.empresa}}) ({{client.direccion}})</option>
+            
+
+          {% endfor %}
+
+        </select>
+        <br>
+    </div>
+      
+    <center><button type="submit" class="btn waves-effect waves-light">Ingresar</button></center>
+    
+    
+  </div>  
+    </form>
+            </div>
+            <div class="card-action right-align">
+              <a href="/list_cartridges">Gestionar</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card cyan darken-3">
+            <div class="card-content black-text">
+              <ul class="collection with-header">
+        <li class="collection-header"><h5><center>Agregados recientemente</center></h5></li>
+        
+        {% for cartridge in Lcartridges %}
+          <li class="collection-item"><div>#{{cartridge.id}}, {{cartridge.modelo}} - ({{cartridge.modelo_imp}})<a href="/list_cartridges/{{cartridge.id}}" class="secondary-content"><i class="material-icons">pageview</i></a></div></li>
+        {%endfor%}
+        
+
+      </ul>
+            </div>
+            <div class="card-action right-align">
+              <a href="/list_cartridges">Ver todos</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+          <div class="card cyan darken-3">
+            <div class="card-content white-text">
+              <span class="card-title"><center>Buscar cartucho</center></span>
+              <div class="container">
+        <div class="nav-wrapper">
+          <form action="/list_cartridges" method="POST"> {% csrf_token %}
+            <div class="input-field">
+              <input type="text" class="validate center-align" name="code" required>
+              <label for="search"><i class="material-icons">search</i></label>
+            </div>
+          </form>
+      </div>
+      </div>
+            </div>
+          </div>
+        </div>
       </div>
       <!-- Fin-->
 
@@ -27,20 +121,37 @@
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
               <span class="card-title">Clientes</span>
-              <p>
-                Gestiona tus clientes, agrega, edita, elimina y modifica de a cuerdo a tus necesidades.
-              </p>
+              <form action="/newclient" method="POST"> {% csrf_token %}
+                <div class="row">
+    
+    <div class="input-field col s12">
+          <i class="material-icons prefix black-text">account_circle</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="Nombre" name="nombre" value="{{ nombre }}" required>
+        </div>
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix black-text">business</i>
+          <input id="icon_telephone" type="text" class="validate" placeholder="Empresa" name="empresa" value="{{ empresa }}" required>
+        </div>
+      
+
+      <div class="input-field col s12">
+          <i class="material-icons prefix black-text">my_location</i>
+          <input id="icon_prefix" type="text" class="validate" placeholder="Direccion" name="direccion" value="{{ direccion }}" required>
+      </div>
+      </div>
+      <center><button type="submit" class="btn waves-effect waves-light ">Agregar</button></center>
+              </form>
             </div>
             <div class="card-action right-align">
               <a href="/list_clients?page=1">Gestionar</a>
-              <a href="/newclient">Agregar</a>
             </div>
           </div>
         </div>
 
          <div class="col s12 m4">
           <div class="card blue-grey darken-1">
-            <div class="card-content indigo-text">
+            <div class="card-content black-text">
               
       <ul class="collection with-header">
         <li class="collection-header"><h5><center>Agregados recientemente</center></h5></li>
