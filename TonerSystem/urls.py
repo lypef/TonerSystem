@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     #Clients
 	url(r'^newclient$', views.newclient, name='newclient'),
 	url(r'^list_clients$', views.list_clients, name='list_clients'),
+    url(r'^list_clients_id/(?P<id>[^/]+)/$', views.list_clients_id, name='list_clients_id'),
     url(r'^list_clients_edit$', views.list_clients_edit, name='list_clients_edit'),
     url(r'^list_clients_delete$', views.list_clients_delete, name='list_clients_delete'),
 

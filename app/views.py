@@ -19,7 +19,8 @@ def login(request):
 @login_required
 def manage(request):
     Llogs = logs.objects.all().order_by('-id')
-
+    Lclients = clients.objects.all().order_by('-id')[:3]  
+    
     paginator = Paginator(Llogs, 9) # Show 25 contacts per page
 
     page = request.GET.get('page')
@@ -33,7 +34,7 @@ def manage(request):
         # If page is out osf range (e.g. 9999), deliver last page of results.
         Llogs = paginator.page(paginator.num_pages)
     
-    return render(request,'manage.html',{'Llogs':Llogs,'page_range':paginator.page_range,'count':paginator.num_pages})
+    return render(request,'manage.html',{'Llogs':Llogs,'page_range':paginator.page_range,'count':paginator.num_pages, 'clients':Lclients})
 
 @login_required
 def newclient(request):
@@ -86,6 +87,25 @@ def list_clients(request):
         Llclients = clients.objects.all().order_by('-id')   
     if request.method == "POST":
         Llclients = clients.objects.filter(nombre__contains=request.POST.get('search', '').upper()).order_by('nombre')
+            
+    paginator = Paginator(Llclients, 10) # Show 25 contacts per page
+
+    page = request.GET.get('page')
+    try:
+        Lclients = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        Lclients = paginator.page(1)
+    except EmptyPage:
+        # If page is out osf range (e.g. 9999), deliver last page of results.
+        Lclients = paginator.page(paginator.num_pages)
+
+    return render (request,'list_clients.html',{'Lclients':Lclients,'page_range':paginator.page_range,'count':paginator.num_pages})
+
+@login_required
+def list_clients_id(request, id):
+    
+    Llclients = clients.objects.filter(id=id)
             
     paginator = Paginator(Llclients, 10) # Show 25 contacts per page
 
