@@ -21,6 +21,7 @@ def manage(request):
     Llogs = logs.objects.all().order_by('-id')
     Lclients = clients.objects.all().order_by('-id')[:3]  
     Lcartridges = cartridges.objects.all().order_by('-id')[:3]
+    clientsc = clients.objects.all().order_by('nombre')
 
     paginator = Paginator(Llogs, 9) # Show 25 contacts per page
 
@@ -35,7 +36,7 @@ def manage(request):
         # If page is out osf range (e.g. 9999), deliver last page of results.
         Llogs = paginator.page(paginator.num_pages)
     
-    return render(request,'manage.html',{'Llogs':Llogs,'page_range':paginator.page_range,'count':paginator.num_pages, 'clients':Lclients, 'Lcartridges':Lcartridges})
+    return render(request,'manage.html',{'Llogs':Llogs,'page_range':paginator.page_range,'count':paginator.num_pages, 'clients':Lclients, 'Lcartridges':Lcartridges, 'clientsc':clientsc})
 
 @login_required
 def newclient(request):

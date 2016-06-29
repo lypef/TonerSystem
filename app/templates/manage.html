@@ -14,7 +14,7 @@
 
   <ul class="collapsible" data-collapsible="expandable">
     <li>
-      <div class="collapsible-header"><i class="material-icons">credit_card</i>Codigos</div>
+      <div class="collapsible-header"><i class="material-icons">credit_card</i>Cartuchos</div>
       <div class="collapsible-body">
         
       <!-- Inicia code numero de cartucho-->
@@ -47,10 +47,10 @@
         <select class="browser-default" name="cliente">
           <option disabled selected>Cliente</option>
 
-          {% for client in clients %}
+          {% for client in clientsc %}
 
             
-              <option value="{{client.id}}" {% if client.id == idclient  %} selected {% endif %}>{{client.nombre}} ({{client.empresa}}) ({{client.direccion}})</option>
+              <option value="{{client.id}}" {% if client.id == idclient  %} selected {% endif %}>{{client.nombre}} ({{client.empresa}})</option>
             
 
           {% endfor %}
@@ -78,7 +78,7 @@
         <li class="collection-header"><h5><center>Agregados recientemente</center></h5></li>
         
         {% for cartridge in Lcartridges %}
-          <li class="collection-item"><div>#{{cartridge.id}}, {{cartridge.modelo}} - ({{cartridge.modelo_imp}})<a href="/list_cartridges/{{cartridge.id}}" class="secondary-content"><i class="material-icons">pageview</i></a></div></li>
+          <li class="collection-item"><div><strong># {{cartridge.id}}</strong> - ({{cartridge.modelo}})<a href="/list_cartridges/{{cartridge.id}}" class="secondary-content"><i class="material-icons">pageview</i></a></div></li>
         {%endfor%}
         
 
