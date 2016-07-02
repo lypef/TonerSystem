@@ -45,7 +45,7 @@
   <ul id="ListShow" class="dropdown-content">
   <li><a href="#Modalchange" class="modal-trigger">Cambiar toner</a></li>
   <li class="divider"></li>
-  <li><a href="/list_clients?page=1">Vaciar logs</a></li>
+  <li><a href="#ModalCleanLogs" class="modal-trigger">Vaciar logs</a></li>
   </ul>
 
 
@@ -345,5 +345,27 @@ Ese cartucho que usted nos entregó es el mismo cartucho que se le devuelve.</p>
     </div>
   </div>
 
+  <!-- Modal ModalCleanLogs -->
+  <div id="ModalCleanLogs" class="modal">
+    <div class="modal-content">
+      <span class="black-text">
+        
+    <form action="/clean_logs"  class="col s12" method="POST"> {% csrf_token %}
+    
+        <p>
+          Esta seguro que desea eliminar todos los registros de actividad ? 
+          Si elige SI ya no podra verlos, ni recuperarlos en un futuro.  
+        </p>
+        
+        <div class="modal-footer">
+          <button type="submit" class="modal-action modal-close btn">Eliminar<i class="material-icons right">delete</i></button>
+        </div>
+          
+        
+    </form>  
+
+      </span>
+    </div>
+  </div>
 
 </html>

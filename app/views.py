@@ -443,4 +443,9 @@ def add_log(registrotxt):
         )
     insert.save()
     
-
+def clean_logs(request):
+    delete_logs = logs.objects.all()
+    delete_logs.delete()
+    add_log('se eliminaron todos los registros.')
+    messages.add_message(request, messages.INFO, 'Registros eliminados')
+    return redirect ('/')
