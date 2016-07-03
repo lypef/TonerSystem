@@ -434,18 +434,24 @@ def change_cartridge(request):
         return redirect ('/list_cartridges')
 
 
-
-
 def add_log(registrotxt):
     insert = logs(
         registro = registrotxt.upper(),
         fecha = datetime.datetime.now(),
         )
     insert.save()
-    
+
+@login_required    
 def clean_logs(request):
-    delete_logs = logs.objects.all()
-    delete_logs.delete()
-    add_log('se eliminaron todos los registros.')
-    messages.add_message(request, messages.INFO, 'Registros eliminados')
-    return redirect ('/')
+    if request.method == 'POST':
+        try:
+            delete_logs = logs.objects.all()
+            delete_logs.delete()
+            add_log('se eliminaron todos los registros.')
+            messages.add_message(request, messages.INFO, 'Registros eliminados')
+            return redirect ('/')
+        except Exception, e:
+            messages.add_message(request, messages.INFO, e)
+    else:
+        messages.add_message(request, messages.INFO, 'No se elimino ningun registro')
+        return redirect ('/')

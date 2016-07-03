@@ -5,6 +5,12 @@
 {% block slider %}{%endblock%}
 
 {% block body %}
+	
+	<script type="text/javascript">
+    $(document).ready(function(){
+      $('.modal-trigger').leanModal();
+    });
+   </script>
 
 		<body class = "grey lighten-4" >
 		<br>
@@ -57,12 +63,8 @@
 		</div>
 
 		<div class="row">
-		<div class="input-field col s6 m6 l6">
-		<p class="margin medium-small"><a href="register.html">Soy cliente!</a></p>
-		</div>
-
-		<div class="input-field col s6 m6 l6">
-		<p class="margin right-align medium-small"><a href="forgot-password.html">Consultar codigo</a></p>
+		<div class="input-field right">
+			<a href="#modalcolsult" class="modal-trigger">Consultar cartucho</a>
 		</div>          
 		</div>
 
@@ -71,6 +73,30 @@
 
 		</div>
 		</div>
+
+<!-- Modal search cartridges -->
+  <div id="modalcolsult" class="modal">
+    <div class="modal-content">
+      <span class="black-text">
+        <h4>Ingrese codigo que desea consultar.</h4>
+        
+    <form action="/"  class="col s12" method="POST"> {% csrf_token %}
+        
+        <div class="input-field col s12">
+          <i class="material-icons prefix">search </i>
+          <input id="icon_prefix" type="number" class="validate" autofocus="true" name="code">
+          <label for="icon_prefix">Codigo de cartucho</label>
+        </div>
+
+        <center>
+          <button type="submit" class="modal-action modal-close btn waves-effect waves-light col s12">Ingresar</button>
+        </center>
+    
+    </form>  
+
+      </span>
+    </div>
+  </div>
 {% endblock %}
 
 {% block footer %}{%endblock%}
