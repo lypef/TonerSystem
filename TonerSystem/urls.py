@@ -34,7 +34,8 @@ urlpatterns = patterns('',
     url(r'^list_cartridges_service_edit$', views.list_cartridges_service_edit, name='list_cartridges_service_edit'),
     url(r'^list_cartridges_clients/(?P<clientid>[^/]+)/$', views.list_cartridges_clients , name='list_cartridges_clients '),
     url(r'^change_cartridge$', views.change_cartridge , name='change_cartridge '),
-    
+    url(r'^consult_id_cartridge$', views.consult_id_cartridge , name='consult_id_cartridge '),
+
     #Logs    
     url(r'^clean_logs$', views.clean_logs , name='clean_logs '),
     

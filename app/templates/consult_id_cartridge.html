@@ -1,0 +1,43 @@
+{% extends 'structure.html' %}
+
+{% block title %} Toner {%endblock%}
+{% block menu %}{%endblock%}
+{% block slider %}{%endblock%}
+{% block body %} 
+
+	{% for cartridge in Lcartridges %}
+		<ul class="collection">
+			
+			<li class="collection-item avatar">
+			<i class="material-icons circle blue">folder</i>
+			<span class="title">CLIENTE</span>
+			<p>
+			NOMBRE: {{cartridge.client.nombre}} <br>
+			EMPRESA: {{cartridge.client.empresa}} <br>
+			DIRECCION: {{cartridge.client.direccion}} <br>
+			TELEFONO: {{cartridge.client.telefono}} <br>
+			MOVIL: {{cartridge.client.movil}} <br>
+			E-MAIL: {{cartridge.client.email}} <br>
+			</p>
+			</li>
+
+			<li class="collection-item avatar">
+			<i class="material-icons circle red">description</i>
+			<span class="title">DETALLES DEL CARTUCHO</span>
+			<p>Cartucho numero {{cartridge.id}}<br>
+			Este cartucho cuenta con [{{cartridge.cilindro_drum}}] servicios de un maximo de [{{cartridge.numero_recarga_maxima}}], el cartucho modelo[{{cartridge.modelo}}] se usa en una impresora [{{cartridge.modelo_imp}}].
+			</p>
+			</li>
+
+			<li class="collection-item avatar">
+			<i class="material-icons circle green">info_outline</i>
+			<span class="title">FECHA DE ULTIMO SERVICIO</span>
+			<p>[{{cartridge.fecha_ultimo_servcio}}]</p>
+			</li>
+
+  		</ul>
+	{%endfor%}
+	<center>
+		<a href="/" class="btn-floating btn-large waves-effect waves-light red large"><i class="material-icons">thumb_up</i></a>
+	</center>
+{% endblock %}	

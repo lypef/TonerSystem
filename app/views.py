@@ -422,7 +422,7 @@ def change_cartridge(request):
         clleno.save()
 
 
-        vartmp = 'se realiza cambio de cartucho optimo. numero: ('+str(cvaciotmp.id)+'), cliente ['+str(cvaciotmp.client.nombre)+'] por cartucho vacio. numero: ('+str(cllenotmp.id)+'), cliente ['+str(cllenotmp.client.nombre)+']'
+        vartmp = 'se realiza cambio de cartucho vacio, numero: ('+str(cvaciotmp.id)+'), cliente ['+str(cvaciotmp.client.nombre)+'] por cartucho optimo, numero: ('+str(cllenotmp.id)+'), cliente ['+str(cllenotmp.client.nombre)+']'
         cvacio.save()
         clleno.save()
         add_log(vartmp)
@@ -455,3 +455,10 @@ def clean_logs(request):
     else:
         messages.add_message(request, messages.INFO, 'No se elimino ningun registro')
         return redirect ('/')
+
+def consult_id_cartridge(request):
+    Lcartridges = cartridges.objects.filter(id=request.POST.get('id', ''))
+    
+    return render (request,'consult_id_cartridge.html',{'Lcartridges': Lcartridges})
+
+

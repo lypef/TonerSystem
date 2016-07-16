@@ -80,11 +80,11 @@
       <span class="black-text">
         <h4>Ingrese codigo que desea consultar.</h4>
         
-    <form action="/"  class="col s12" method="POST"> {% csrf_token %}
+    <form action="/consult_id_cartridge"  class="col s12" method="POST"> {% csrf_token %}
         
         <div class="input-field col s12">
           <i class="material-icons prefix">search </i>
-          <input id="icon_prefix" type="number" class="validate" autofocus="true" name="code">
+          <input id="icon_prefix" type="number" class="validate" autofocus="true" name="id">
           <label for="icon_prefix">Codigo de cartucho</label>
         </div>
 
