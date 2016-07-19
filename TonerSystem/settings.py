@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '3*%by69%jtqt*@j-c0_4ogqy)7ovhz!kr(qqx2w+#dy8(ql#n%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -59,13 +59,19 @@ WSGI_APPLICATION = 'TonerSystem.wsgi.application'
 
 DATABASES = {
     'default':{
-        'ENGINE': 'django.db.backends.mysql',
+        #'ENGINE': 'django.db.backends.mysql',
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'lypef_db'),
-        'NAME': 'lypef_db',
-        'USER': 'lypef',
-        'PASSWORD': 'admin',
-        'HOST': 'mysql-lypef.alwaysdata.net',
+        #'NAME': 'lypef_db',
+        #'USER': 'lypef',
+        #'PASSWORD': 'admin',
+        #'HOST': 'mysql-lypef.alwaysdata.net',
+        #'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cartridge$lypef_db',
+        'USER': 'cartridge',
+        'PASSWORD': 'adminadmin',
+        'HOST': 'cartridge.mysql.pythonanywhere-services.com',
         'PORT': '3306',
     }
 }
