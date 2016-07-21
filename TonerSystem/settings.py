@@ -67,6 +67,7 @@ DATABASES = {
         #'PASSWORD': 'admin',
         #'HOST': 'mysql-lypef.alwaysdata.net',
         #'PORT': '3306',
+        
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cartridge$lypef_db',
         'USER': 'cartridge',
@@ -90,7 +91,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR+'/public/')
-STATIC_URL = '/public/'
+STATIC_URL = os.path.join(BASE_DIR+'/public/')
 
 from django.core.urlresolvers import reverse_lazy
 LOGIN_URL = reverse_lazy('login')
