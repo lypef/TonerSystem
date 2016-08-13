@@ -332,7 +332,7 @@ def recharge_cartridge(request):
             update.save()
             add_log('se realiza recarga normal a cartucho numero: ('+str(update.id)+'), cliente ['+str(update.client.nombre)+']')
             messages.add_message(request, messages.INFO, 'Cartucho ['  + request.POST.get('id','')+ '] recargado con exito')
-            return redirect ('/list_cartridges')
+            return redirect (request.POST.get('url',''))
         else:
             return redirect (request.POST.get('url',''))
             
