@@ -227,7 +227,7 @@ def list_cartridges(request):
     if request.method == "GET":
         Lcartridges = cartridges.objects.all().order_by('-id')   
     if request.method == "POST":
-        Lcartridges = cartridges.objects.filter(id__contains=request.POST.get('code', '')).order_by('id')
+        Lcartridges = cartridges.objects.filter(id=request.POST.get('code', '')).order_by('id') 
             
     paginator = Paginator(Lcartridges, 5) # Show 25 contacts per page
 

@@ -59,14 +59,8 @@ WSGI_APPLICATION = 'TonerSystem.wsgi.application'
 
 DATABASES = {
     'default':{
-        #'ENGINE': 'django.db.backends.mysql',
         #'ENGINE': 'django.db.backends.sqlite3',
         #'NAME': os.path.join(BASE_DIR, 'lypef_db'),
-        #'NAME': 'lypef_db',
-        #'USER': 'lypef',
-        #'PASSWORD': 'admin',
-        #'HOST': 'mysql-lypef.alwaysdata.net',
-        #'PORT': '3306',
         
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cartridge$lypef_db',
